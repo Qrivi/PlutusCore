@@ -1,5 +1,5 @@
-group 'be.plutus'
-version '1.0-SNAPSHOT'
+group "be.plutus"
+version "1.0-SNAPSHOT"
 
 buildscript {
     repositories {
@@ -10,18 +10,31 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'spring-boot'
+repositories {
+    mavenCentral()
+    maven { url "http://repo1.maven.org/maven2" }
+}
+
+ext {
+    hibernatEMVersion = "5.1.0.Final"
+    hibernateValidationVersion = "5.2.4.Final"
+    springDataVersion = "1.9.2.RELEASE"
+    javaxElVersion = "3.0.0"
+}
+
+apply plugin: "java"
+apply plugin: "spring-boot"
 
 bootRepackage {
     mainClass = "be.plutus.api.Application"
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    testCompile 'junit:junit:4.11'
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.data:spring-data-jpa:$springDataVersion"
+    compile "org.hibernate:hibernate-entitymanager:$hibernatEMVersion"
+    compile "org.hibernate:hibernate-validator:$hibernateValidationVersion"
+    compile "javax.el:javax.el-api:$javaxElVersion"
+
+    testCompile "junit:junit:4.11"
 }

@@ -1,19 +1,48 @@
 package be.plutus.core.transaction;
 
+import be.plutus.core.account.User;
 import be.plutus.core.location.Location;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
+@Table( name = "transaction" )
 public class Transaction{
 
+    @NotBlank( message = "{NotBlank.Transaction.title" )
+    @Column( name = "title" )
     private String title;
+
+    @Column( name = "description" )
     private String description;
 
+    @Min( value = 0, message = "{Min.Transaction.amount}" )
+    @Column( name = "amount" )
     private double amount;
+
+    @NotNull( message = "{NotNull.Transaction.type}" )
+    @Column( name = "type" )
+    @Enumerated( EnumType.STRING ) //VERIFY David
     private TransactionType type;
 
+    @Valid
+    @NotNull( message = "{NotNull.Transaction.location}" )
+    @ManyToOne( cascade = CascadeType.ALL ) //VERIFY David
     private Location location;
+
+    @NotNull( message = "{NotNull.Transaction.timestamp}" )
+    @Temporal( TemporalType.TIMESTAMP )
     private Date timestamp;
+
+    @Valid
+    @NotNull( message = "{NotNull.Transaction.user}" )
+    @ManyToOne( cascade = CascadeType.ALL ) //VERIFY David
+    private User user;
 
     public Transaction(){
     }
@@ -64,5 +93,13 @@ public class Transaction{
 
     public void setTimestamp( Date timestamp ){
         this.timestamp = timestamp;
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser( User user ){
+        this.user = user;
     }
 }

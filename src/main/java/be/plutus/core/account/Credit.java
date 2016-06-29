@@ -2,11 +2,25 @@ package be.plutus.core.account;
 
 import be.plutus.core.currency.Currency;
 
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table( name = "credit" )
 public class Credit{
+
+    @Min( value = 0, message = "{Min.Credit.amount}" )
+    @Column( name = "amount" )
     private double amount;
+
+    @NotNull( message = "{NotNull.Credit.currency}" )
+    @Column( name = "currency" )
+    @Enumerated( EnumType.STRING ) //VERIFY David
     private Currency currency;
 
-    public Credit(){}
+    public Credit(){
+    }
 
     public double getAmount(){
         return amount;

@@ -1,18 +1,49 @@
 package be.plutus.core.location;
 
-import be.plutus.core.location.Institution;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table( name = "campus" )
 public class Campus{
 
+    @NotBlank( message = "{NotBlank.Campus.name}" )
+    @Column( name = "name" )
     private String name;
+
+    @NotNull( message = "{NotNull.Campus.Institution}" )
+    @Column( name = "institution" )
+    @Enumerated( EnumType.STRING ) //VERIFY David
     private Institution institution;
 
-    private double lat;
-    private double lng;
+    @Min( value = -90, message = "{Min.Campus.lat}" )
+    @Max( value = 90, message = "{Max.Campus.lat}" )
+    @Column( name = "lat" )
+    private Double lat;
 
+    @Min( value = -180, message = "{Min.Campus.lon}" )
+    @Max( value = 180, message = "{Max.Campus.lon}" )
+    @Column( name = "lng" )
+    private Double lng;
+
+    @NotBlank( message = "{NotBlank.Campus.address}" )
+    @Column( name = "address" )
     private String address;
-    private int zip;
+
+    @NotBlank( message = "{NotBlank.Campus.city}" )
+    @Column( name = "city" )
     private String city;
+
+    @NotNull( message = "{NotNull.Campus.zip}" )
+    @Column( name = "zip" )
+    private int zip;
+
+    @NotBlank( message = "{NotBlank.Campus.country}" )
+    @Column( name = "country" )
     private String country;
 
     public Campus(){

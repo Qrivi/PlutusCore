@@ -1,15 +1,40 @@
 package be.plutus.core.account;
 
 import be.plutus.core.location.Institution;
+import org.hibernate.validator.constraints.NotBlank;
 
-public abstract class User{
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name="user")
+public class User{
+
+    @NotBlank( message = "{NotBlank.User.firstName}" )
+    @Column(name="firstname")
     private String firstName;
+
+    @NotBlank( message = "{NotBlank.User.lastName}" )
+    @Column(name="lastname")
     private String lastName;
 
+    @NotNull( message = "{NotNull.User.Institution}" )
+    @Column( name = "institution" )
+    @Enumerated( EnumType.STRING ) //VERIFY David
     private Institution institution;
+
+    @NotBlank( message = "{NotBlank.User.username}" )
+    @Column(name="username")
     private String username;
+
+    @NotBlank( message = "{NotBlank.User.password}")
+    @Column( name = "password" )
     private String password;
 
+    @Valid
+    @NotNull( message = "{NotNull.User.credit}" )
+    @OneToOne( cascade = CascadeType.ALL, orphanRemoval = true )
     private Credit credit;
 
     public User(){
@@ -34,7 +59,7 @@ public abstract class User{
     }
 
     public void setFirstName( String firstName ){
-        this.firstName = firstName;
+        this.firstName = firstName.trim();
     }
 
     public String getLastName(){
@@ -42,7 +67,7 @@ public abstract class User{
     }
 
     public void setLastName( String lastName ){
-        this.lastName = lastName;
+        this.lastName = lastName.trim();
     }
 
     public Institution getInstitution(){
@@ -58,7 +83,7 @@ public abstract class User{
     }
 
     public void setUsername( String username ){
-        this.username = username;
+        this.username = username.trim();
     }
 
     public String getPassword(){
