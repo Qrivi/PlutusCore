@@ -1,5 +1,6 @@
 package be.plutus.core.location;
 
+import be.plutus.common.identifiable.Identifiable;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -7,8 +8,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="location")
-public class Location{
+@Table( name = "location" )
+public class Location extends Identifiable{
 
     @NotBlank( message = "{NotBlank.Location.name}" )
     @Column( name = "name" )

@@ -1,5 +1,6 @@
 package be.plutus.core.account;
 
+import be.plutus.common.identifiable.Identifiable;
 import be.plutus.core.currency.Currency;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "credit" )
-public class Credit{
+public class Credit extends Identifiable{
 
     @Min( value = 0, message = "{Min.Credit.amount}" )
     @Column( name = "amount" )

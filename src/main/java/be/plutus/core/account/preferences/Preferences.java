@@ -1,16 +1,18 @@
 package be.plutus.core.account.preferences;
 
+import be.plutus.common.identifiable.Identifiable;
+
 import javax.persistence.*;
 import java.util.Map;
 
 @Entity
 @Table( name = "preferences" )
-public class Preferences{
+public class Preferences extends Identifiable{
 
     @ElementCollection
     @MapKeyColumn( name = "name" )
     @Column( name = "value" )
-    @CollectionTable( name= "preferences", joinColumns = @JoinColumn( name = "preference_id" ) )
+    @CollectionTable( name = "preferences", joinColumns = @JoinColumn( name = "preference_id" ) )
     private Map<String, String> prefs;
 
     public Preferences(){

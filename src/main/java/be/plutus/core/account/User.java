@@ -1,5 +1,6 @@
 package be.plutus.core.account;
 
+import be.plutus.common.identifiable.Identifiable;
 import be.plutus.core.location.Institution;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -9,14 +10,14 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "user" )
-public class User{
+public class User extends Identifiable{
 
     @NotBlank( message = "{NotBlank.User.firstName}" )
-    @Column(name = "first_name")
+    @Column( name = "first_name" )
     private String firstName;
 
     @NotBlank( message = "{NotBlank.User.lastName}" )
-    @Column(name="last_name")
+    @Column( name = "last_name" )
     private String lastName;
 
     @NotNull( message = "{NotNull.User.Institution}" )
@@ -28,7 +29,7 @@ public class User{
     @Column( name = "username" )
     private String username;
 
-    @NotBlank( message = "{NotBlank.User.password}")
+    @NotBlank( message = "{NotBlank.User.password}" )
     @Column( name = "password" )
     private String password;
 

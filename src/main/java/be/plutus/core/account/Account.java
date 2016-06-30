@@ -1,7 +1,8 @@
 package be.plutus.core.account;
 
+import be.plutus.common.identifiable.Identifiable;
+import be.plutus.common.validation.Whitelisted;
 import be.plutus.core.account.preferences.Preferences;
-import be.plutus.core.validation.Whitelisted;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -12,11 +13,11 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table( name = "account" )
-public class Account{
+public class Account extends Identifiable{
 
     @NotBlank( message = "{NotBlank.Account.email}" )
     @Email( message = "{Email.Account.email}" )
-    @Column( name = "email" )
+    @Column( name = "email", unique = true )
     private String email;
 
     @NotBlank( message = "{NotBlank.Account.password}" )

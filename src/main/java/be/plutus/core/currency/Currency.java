@@ -15,6 +15,13 @@ public enum Currency{
         this.valueInEuro = valueInEuro;
     }
 
+    public static Currency getFromName( String name ){
+        for( Currency currency : values() )
+            if( currency.name.equals( name ) )
+                return currency;
+        return null;
+    }
+
     public String getName(){
         return name;
     }
@@ -25,13 +32,6 @@ public enum Currency{
 
     public double getValueInEuro(){
         return valueInEuro;
-    }
-
-    public static Currency getFromName( String name ){
-        for( Currency currency : values() )
-            if( currency.name.equals( name ) )
-                return currency;
-        return null;
     }
 
     @Override

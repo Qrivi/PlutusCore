@@ -1,7 +1,7 @@
 package be.plutus.core.location;
 
 public enum Institution{
-    UCLL("ucll", "University-Colleges Leuven-Limburg");
+    UCLL( "ucll", "University-Colleges Leuven-Limburg" );
 
     private String slur;
     private String name;

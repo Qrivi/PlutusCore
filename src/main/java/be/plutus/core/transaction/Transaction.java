@@ -1,5 +1,6 @@
 package be.plutus.core.transaction;
 
+import be.plutus.common.identifiable.Identifiable;
 import be.plutus.core.account.User;
 import be.plutus.core.location.Location;
 import org.hibernate.validator.constraints.NotBlank;
@@ -12,7 +13,7 @@ import java.util.Date;
 
 @Entity
 @Table( name = "transaction" )
-public class Transaction{
+public class Transaction extends Identifiable{
 
     @NotBlank( message = "{NotBlank.Transaction.title" )
     @Column( name = "title" )

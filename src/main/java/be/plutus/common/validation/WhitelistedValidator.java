@@ -17,7 +17,7 @@ public class WhitelistedValidator implements ConstraintValidator<Whitelisted, St
     @Override
     public boolean isValid( String value, ConstraintValidatorContext context ){
         for( String s : blacklist )
-            if( s.equalsIgnoreCase( value ))
+            if( s.equalsIgnoreCase( value ) )
                 return false;
         return true;
     }
