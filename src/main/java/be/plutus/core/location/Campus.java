@@ -17,7 +17,7 @@ public class Campus{
 
     @NotNull( message = "{NotNull.Campus.Institution}" )
     @Column( name = "institution" )
-    @Enumerated( EnumType.STRING ) //VERIFY David
+    @Enumerated( EnumType.STRING )
     private Institution institution;
 
     @Min( value = -90, message = "{Min.Campus.lat}" )
@@ -47,7 +47,6 @@ public class Campus{
     private String country;
 
     public Campus(){
-
     }
 
     public String getName(){

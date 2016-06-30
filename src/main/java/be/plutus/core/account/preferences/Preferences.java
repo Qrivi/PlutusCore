@@ -7,7 +7,10 @@ import java.util.Map;
 @Table( name = "preferences" )
 public class Preferences{
 
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true )
+    @ElementCollection
+    @MapKeyColumn( name = "name" )
+    @Column( name = "value" )
+    @CollectionTable( name= "preferences", joinColumns = @JoinColumn( name = "preference_id" ) )
     private Map<String, String> prefs;
 
     public Preferences(){
@@ -18,9 +21,7 @@ public class Preferences{
     }
 
     public String get( String key ){
-        if( prefs.containsKey( key ) )
-            return prefs.get( key );
-        return null;
+        return prefs.get( key );
     }
 
     public void set( String key, String value ){

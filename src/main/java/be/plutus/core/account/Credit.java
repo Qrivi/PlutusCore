@@ -16,7 +16,7 @@ public class Credit{
 
     @NotNull( message = "{NotNull.Credit.currency}" )
     @Column( name = "currency" )
-    @Enumerated( EnumType.STRING ) //VERIFY David
+    @Enumerated( EnumType.STRING )
     private Currency currency;
 
     public Credit(){

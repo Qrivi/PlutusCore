@@ -16,7 +16,8 @@ public class Location{
 
     @Valid
     @NotNull( message = "{NotNull.Location.campus}" )
-    @ManyToOne( cascade = CascadeType.ALL ) //VERIFY David
+    @ManyToOne
+    @JoinColumn( name = "campus_id" )
     private Campus campus;
 
     public Location(){

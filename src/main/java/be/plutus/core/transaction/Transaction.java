@@ -27,12 +27,13 @@ public class Transaction{
 
     @NotNull( message = "{NotNull.Transaction.type}" )
     @Column( name = "type" )
-    @Enumerated( EnumType.STRING ) //VERIFY David
+    @Enumerated( EnumType.STRING )
     private TransactionType type;
 
     @Valid
     @NotNull( message = "{NotNull.Transaction.location}" )
-    @ManyToOne( cascade = CascadeType.ALL ) //VERIFY David
+    @ManyToOne
+    @JoinColumn( name = "location_id" )
     private Location location;
 
     @NotNull( message = "{NotNull.Transaction.timestamp}" )
@@ -41,7 +42,8 @@ public class Transaction{
 
     @Valid
     @NotNull( message = "{NotNull.Transaction.user}" )
-    @ManyToOne( cascade = CascadeType.ALL ) //VERIFY David
+    @ManyToOne
+    @JoinColumn( name = "user_id" )
     private User user;
 
     public Transaction(){

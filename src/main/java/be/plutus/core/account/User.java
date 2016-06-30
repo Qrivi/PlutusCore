@@ -8,24 +8,24 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="user")
+@Table( name = "user" )
 public class User{
 
     @NotBlank( message = "{NotBlank.User.firstName}" )
-    @Column(name="firstname")
+    @Column(name = "first_name")
     private String firstName;
 
     @NotBlank( message = "{NotBlank.User.lastName}" )
-    @Column(name="lastname")
+    @Column(name="last_name")
     private String lastName;
 
     @NotNull( message = "{NotNull.User.Institution}" )
     @Column( name = "institution" )
-    @Enumerated( EnumType.STRING ) //VERIFY David
+    @Enumerated( EnumType.STRING )
     private Institution institution;
 
     @NotBlank( message = "{NotBlank.User.username}" )
-    @Column(name="username")
+    @Column( name = "username" )
     private String username;
 
     @NotBlank( message = "{NotBlank.User.password}")

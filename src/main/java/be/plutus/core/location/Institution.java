@@ -1,8 +1,5 @@
 package be.plutus.core.location;
 
-/**
- * Created by Krivi on 28/06/16.
- */
 public enum Institution{
     UCLL("ucll", "University-Colleges Leuven-Limburg");
 
