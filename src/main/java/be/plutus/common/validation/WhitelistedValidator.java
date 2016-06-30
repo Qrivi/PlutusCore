@@ -1,4 +1,4 @@
-package be.plutus.core.validation;
+package be.plutus.common.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

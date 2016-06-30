@@ -1,4 +1,4 @@
-package be.plutus.core.validation;
+package be.plutus.common.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Constraint( validatedBy = {WhitelistedValidator.class} )
 public @interface Whitelisted{
 
-    String message() default "{be.plutus.core.validation.Whitelisted.message}";
+    String message() default "{be.plutus.common.validation.Whitelisted.message}";
 
     Class<?>[] groups() default {};
 
