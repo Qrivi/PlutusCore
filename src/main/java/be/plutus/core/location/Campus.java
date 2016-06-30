@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Campus extends Identifiable{
 
     @NotBlank( message = "{NotBlank.Campus.name}" )
-    @Column( name = "name" )
+    @Column( name = "name", unique = true )
     private String name;
 
     @NotNull( message = "{NotNull.Campus.Institution}" )
