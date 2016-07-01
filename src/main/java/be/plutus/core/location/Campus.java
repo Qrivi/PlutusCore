@@ -26,12 +26,12 @@ public class Campus extends Identifiable{
     @Min( value = -90, message = "{Min.Campus.lat}" )
     @Max( value = 90, message = "{Max.Campus.lat}" )
     @Column( name = "lat" )
-    private Double lat;
+    private double lat;
 
     @Min( value = -180, message = "{Min.Campus.lon}" )
     @Max( value = 180, message = "{Max.Campus.lon}" )
     @Column( name = "lng" )
-    private Double lng;
+    private double lng;
 
     @NotBlank( message = "{NotBlank.Campus.address}" )
     @Column( name = "address" )
