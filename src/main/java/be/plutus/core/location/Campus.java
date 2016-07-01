@@ -37,13 +37,13 @@ public class Campus extends Identifiable{
     @Column( name = "address" )
     private String address;
 
-    @NotBlank( message = "{NotBlank.Campus.city}" )
-    @Column( name = "city" )
-    private String city;
-
     @NotNull( message = "{NotNull.Campus.zip}" )
     @Column( name = "zip" )
     private int zip;
+
+    @NotBlank( message = "{NotBlank.Campus.city}" )
+    @Column( name = "city" )
+    private String city;
 
     @NotBlank( message = "{NotBlank.Campus.country}" )
     @Column( name = "country" )
