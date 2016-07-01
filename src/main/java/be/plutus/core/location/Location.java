@@ -22,8 +22,8 @@ public class Location extends Identifiable{
     @Column( name = "lat" )
     private double lat;
 
-    @Min( value = -180, message = "{Min.Location.lon}" )
-    @Max( value = 180, message = "{Max.Location.lon}" )
+    @Min( value = -180, message = "{Min.Location.lng}" )
+    @Max( value = 180, message = "{Max.Location.lng}" )
     @Column( name = "lng" )
     private double lng;
 
