@@ -6,9 +6,11 @@ import be.plutus.core.transaction.Transaction;
 import be.plutus.core.transaction.TransactionType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer>{
 
     List<Transaction> findByUser( User user, Pageable pageable );

@@ -40,6 +40,11 @@ public class User extends Identifiable{
     @JoinColumn( name = "credit_id" )
     private Credit credit;
 
+    @Valid
+    @ManyToOne
+    @JoinColumn( name = "account_id" )
+    private Account account;
+
     public User(){
     }
 
@@ -103,5 +108,13 @@ public class User extends Identifiable{
 
     public void setCredit( Credit credit ){
         this.credit = credit;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount( Account account ) {
+        this.account = account;
     }
 }

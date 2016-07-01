@@ -18,7 +18,7 @@ public class Institution extends Identifiable{
 
     @NotBlank( message = "{NotBlank.Institution.slur}" )
     @Size( max = 10, message = "{Size.Institution.slur}" )
-    @Column( name = "name", unique = true )
+    @Column( name = "slur", unique = true )
     private String slur;
 
     public Institution(){

@@ -10,6 +10,15 @@ buildscript {
     }
 }
 
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.boxfuse.client:flyway-release:4.0"
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url "http://repo1.maven.org/maven2" }
@@ -20,10 +29,12 @@ ext {
     hibernateValidationVersion = "5.2.4.Final"
     springDataVersion = "1.9.2.RELEASE"
     javaxElVersion = "3.0.0"
+    mysqlVersion = "5.1.38"
 }
 
 apply plugin: "java"
 apply plugin: "spring-boot"
+apply plugin: "org.flywaydb.flyway"
 
 bootRepackage {
     mainClass = "be.plutus.api.Application"
@@ -31,10 +42,13 @@ bootRepackage {
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "org.springframework.data:spring-data-jpa:$springDataVersion"
+    compile "org.hibernate:hibernate-core:$hibernatEMVersion"
     compile "org.hibernate:hibernate-entitymanager:$hibernatEMVersion"
     compile "org.hibernate:hibernate-validator:$hibernateValidationVersion"
     compile "javax.el:javax.el-api:$javaxElVersion"
+    compile "mysql:mysql-connector-java:$mysqlVersion"
 
     testCompile "junit:junit:4.11"
 }

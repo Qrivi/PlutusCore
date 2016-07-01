@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table( name = "account" )
@@ -26,10 +27,8 @@ public class Account extends Identifiable{
     @Column( name = "password" )
     private String password;
 
-    @Valid
-    @OneToOne( cascade = CascadeType.ALL, orphanRemoval = true )
-    @JoinColumn( name = "user_id" )
-    private User user;
+    @OneToMany( mappedBy = "account" , fetch = FetchType.EAGER )
+    private List<User> users;
 
     @Valid
     @NotNull( message = "{NotNull.Account.preferences}" )
@@ -56,12 +55,8 @@ public class Account extends Identifiable{
         this.password = password;
     }
 
-    public User getUser(){
-        return user;
-    }
-
-    public void setUser( User user ){
-        this.user = user;
+    public List<User> getUsers(){
+        return users;
     }
 
     public Preferences getPreferences(){
