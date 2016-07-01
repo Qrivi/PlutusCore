@@ -4,6 +4,7 @@ import be.plutus.common.identifiable.Identifiable;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -16,9 +17,10 @@ public class Campus extends Identifiable{
     @Column( name = "name", unique = true )
     private String name;
 
+    @Valid
     @NotNull( message = "{NotNull.Campus.Institution}" )
-    @Column( name = "institution" )
-    @Enumerated( EnumType.STRING )
+    @ManyToOne
+    @JoinColumn( name = "institution_id" )
     private Institution institution;
 
     @Min( value = -90, message = "{Min.Campus.lat}" )

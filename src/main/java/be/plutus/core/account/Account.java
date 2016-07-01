@@ -28,11 +28,13 @@ public class Account extends Identifiable{
 
     @Valid
     @OneToOne( cascade = CascadeType.ALL, orphanRemoval = true )
+    @JoinColumn( name = "user_id" )
     private User user;
 
     @Valid
     @NotNull( message = "{NotNull.Account.preferences}" )
     @OneToOne( cascade = CascadeType.ALL, orphanRemoval = true )
+    @JoinColumn( name = "preferences_id" )
     private Preferences preferences;
 
     public Account(){

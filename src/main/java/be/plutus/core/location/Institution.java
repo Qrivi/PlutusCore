@@ -1,13 +1,37 @@
 package be.plutus.core.location;
 
-public enum Institution{
-    UCLL( "ucll", "University-Colleges Leuven-Limburg" );
+import be.plutus.common.identifiable.Identifiable;
+import org.hibernate.validator.constraints.NotBlank;
 
-    private String slur;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table( name = "institution" )
+public class Institution extends Identifiable{
+
+    @NotBlank( message = "{NotBlank.Institution.name}" )
+    @Column( name = "name", unique = true )
     private String name;
 
-    Institution( String slur, String name ){
+    @NotBlank( message = "{NotBlank.Institution.slur}" )
+    @Column( name = "name", unique = true )
+    private String slur;
+
+    public Institution(){
+    }
+
+    public Institution( String slur, String name ){
         this.slur = slur;
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName( String name ){
         this.name = name;
     }
 
@@ -15,12 +39,7 @@ public enum Institution{
         return slur;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    @Override
-    public String toString(){
-        return getName();
+    public void setSlur( String slur ){
+        this.slur = slur;
     }
 }

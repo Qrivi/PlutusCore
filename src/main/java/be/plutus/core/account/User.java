@@ -20,9 +20,10 @@ public class User extends Identifiable{
     @Column( name = "last_name" )
     private String lastName;
 
+    @Valid
     @NotNull( message = "{NotNull.User.Institution}" )
-    @Column( name = "institution" )
-    @Enumerated( EnumType.STRING )
+    @OneToOne
+    @JoinColumn( name = "institution_id" )
     private Institution institution;
 
     @NotBlank( message = "{NotBlank.User.username}" )
@@ -36,6 +37,7 @@ public class User extends Identifiable{
     @Valid
     @NotNull( message = "{NotNull.User.credit}" )
     @OneToOne( cascade = CascadeType.ALL, orphanRemoval = true )
+    @JoinColumn( name = "credit_id" )
     private Credit credit;
 
     public User(){
