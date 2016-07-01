@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table( name = "institution" )
@@ -16,6 +17,7 @@ public class Institution extends Identifiable{
     private String name;
 
     @NotBlank( message = "{NotBlank.Institution.slur}" )
+    @Size( max = 10, message = "{Size.Institution.slur}" )
     @Column( name = "name", unique = true )
     private String slur;
 
