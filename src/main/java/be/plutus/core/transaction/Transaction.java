@@ -2,6 +2,7 @@ package be.plutus.core.transaction;
 
 import be.plutus.common.identifiable.Identifiable;
 import be.plutus.core.account.User;
+import be.plutus.core.currency.Currency;
 import be.plutus.core.location.Location;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -25,6 +26,11 @@ public class Transaction extends Identifiable{
     @Min( value = 0, message = "{Min.Transaction.amount}" )
     @Column( name = "amount" )
     private double amount;
+
+    @NotNull( message = "{NotNull.Transaction.currency}" )
+    @Column( name = "currency" )
+    @Enumerated( EnumType.STRING )
+    private Currency currency;
 
     @NotNull( message = "{NotNull.Transaction.type}" )
     @Column( name = "type" )
@@ -72,6 +78,14 @@ public class Transaction extends Identifiable{
 
     public void setAmount( double amount ){
         this.amount = amount;
+    }
+
+    public Currency getCurrency(){
+        return currency;
+    }
+
+    public void setCurrency( Currency currency ){
+        this.currency = currency;
     }
 
     public TransactionType getType(){
