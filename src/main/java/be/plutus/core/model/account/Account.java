@@ -1,11 +1,11 @@
 package be.plutus.core.model.account;
 
-import be.plutus.common.crypto.Crypto;
 import be.plutus.common.identifiable.Identifiable;
 import be.plutus.common.validation.Whitelisted;
 import be.plutus.core.model.account.preferences.Preferences;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -28,10 +28,6 @@ public class Account extends Identifiable{
     @Column( name = "password" )
     private String password;
 
-    @NotBlank( message = "{NotBlank.Account.salt}" )
-    @Column( name = "salt" )
-    private String salt;
-
     @OneToMany( mappedBy = "account", fetch = FetchType.EAGER )
     private List<User> users;
 
@@ -45,7 +41,7 @@ public class Account extends Identifiable{
     }
 
     public boolean isPasswordValid( String plainTextPassword ){
-        return Crypto.createHash( plainTextPassword, salt ).equals( password );
+        return BCrypt.checkpw( plainTextPassword, password );
     }
 
     public String getEmail(){
@@ -61,8 +57,8 @@ public class Account extends Identifiable{
     }
 
     public void setPlainTextPassword( String plainTextPassword ){
-        this.salt = Crypto.createSalt();
-        this.password = Crypto.createHash( plainTextPassword, salt );
+        String salt = BCrypt.gensalt( 12 );
+        this.password = BCrypt.hashpw( plainTextPassword, salt );
     }
 
     public List<User> getUsers(){

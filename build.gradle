@@ -31,6 +31,7 @@ ext {
     javaxElVersion = "3.0.0"
     mysqlVersion = "5.1.38"
     jacksonVersion = "2.7.4"
+    bCryptVersion = "0.3m"
 }
 
 apply plugin: "java"
@@ -51,6 +52,7 @@ dependencies {
     compile "javax.el:javax.el-api:$javaxElVersion"
     compile "mysql:mysql-connector-java:$mysqlVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "org.mindrot:jbcrypt:$bCryptVersion"
 
     testCompile "junit:junit:4.11"
 }
