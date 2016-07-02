@@ -30,6 +30,7 @@ ext {
     springDataVersion = "1.9.2.RELEASE"
     javaxElVersion = "3.0.0"
     mysqlVersion = "5.1.38"
+    jacksonVersion = "2.7.4"
 }
 
 apply plugin: "java"
@@ -49,6 +50,7 @@ dependencies {
     compile "org.hibernate:hibernate-validator:$hibernateValidationVersion"
     compile "javax.el:javax.el-api:$javaxElVersion"
     compile "mysql:mysql-connector-java:$mysqlVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
 
     testCompile "junit:junit:4.11"
 }

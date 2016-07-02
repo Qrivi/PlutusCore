@@ -48,20 +48,6 @@ public class User extends Identifiable{
     public User(){
     }
 
-    public User( String firstName, String lastName, Institution institution, String username, String password, Credit credit ){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.institution = institution;
-        this.username = username;
-        this.password = password;
-        this.credit = credit;
-    }
-
-    /* potential redundant constructor
-    public User( String firstName, String lastName, Institution institution, String username, String password ){
-        this( firstName, lastName, institution, username, password, new Credit() );
-    } */
-
     public String getFirstName(){
         return firstName;
     }

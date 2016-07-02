@@ -38,7 +38,7 @@ public class AccountServiceImpl implements AccountService{
         Account account = accountRepository.findOne( id );
 
         if( account == null )
-            throw new NullPointerException( "Account with id " + id + " was not found!" );
+            throw new NullPointerException( "Account with id " + id + " was not found" );
 
         account.setEmail( newEmail );
         account.setPlainTextPassword( newPassword );
@@ -51,7 +51,7 @@ public class AccountServiceImpl implements AccountService{
         Account account = accountRepository.findOne( id );
 
         if( account == null )
-            throw new NullPointerException( "Account with id " + id + " was not found!" );
+            throw new NullPointerException( "Account with id " + id + " was not found" );
 
         accountRepository.delete( account );
     }
