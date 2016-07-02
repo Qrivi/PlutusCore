@@ -32,7 +32,7 @@ public class Account extends Identifiable{
     @Column( name = "salt" )
     private String salt;
 
-    @OneToMany( mappedBy = "account" , fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "account", fetch = FetchType.EAGER )
     private List<User> users;
 
     @Valid
@@ -44,8 +44,7 @@ public class Account extends Identifiable{
     public Account(){
     }
 
-    public boolean isPasswordValid( String plainTextPassword )
-    {
+    public boolean isPasswordValid( String plainTextPassword ){
         return Crypto.createHash( plainTextPassword, salt ).equals( password );
     }
 

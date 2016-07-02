@@ -11,5 +11,6 @@ import java.util.List;
 public interface LocationRepository extends JpaRepository<Location, Integer>{
 
     Location findByName( String name );
+
     List<Location> findByCampus( Campus campus );
 }

@@ -110,11 +110,11 @@ public class User extends Identifiable{
         this.credit = credit;
     }
 
-    public Account getAccount() {
+    public Account getAccount(){
         return account;
     }
 
-    public void setAccount( Account account ) {
+    public void setAccount( Account account ){
         this.account = account;
     }
 }

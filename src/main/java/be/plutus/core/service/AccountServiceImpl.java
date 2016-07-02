@@ -9,23 +9,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService{
 
     @Autowired
     AccountRepository accountRepository;
 
     @Override
-    public Account getAccount( int id ) {
+    public Account getAccount( int id ){
         return accountRepository.findOne( id );
     }
 
     @Override
-    public Account getAccount( String email ) {
+    public Account getAccount( String email ){
         return accountRepository.findByEmail( email );
     }
 
     @Override
-    public Account createAccount( String email, String password ) {
+    public Account createAccount( String email, String password ){
         Account account = new Account();
         account.setEmail( email );
         account.setPlainTextPassword( password );
@@ -34,10 +34,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void updateAccount( int id, String newEmail, String newPassword ) {
+    public void updateAccount( int id, String newEmail, String newPassword ){
         Account account = accountRepository.findOne( id );
 
-        if (account == null)
+        if( account == null )
             throw new NullPointerException( "Account with id " + id + " was not found!" );
 
         account.setEmail( newEmail );
@@ -47,10 +47,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void removeAccount( int id ) {
+    public void removeAccount( int id ){
         Account account = accountRepository.findOne( id );
 
-        if (account == null)
+        if( account == null )
             throw new NullPointerException( "Account with id " + id + " was not found!" );
 
         accountRepository.delete( account );

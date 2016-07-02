@@ -13,21 +13,21 @@ import javax.annotation.PostConstruct;
 
 @RestController
 @RequestMapping( "/account" )
-public class AccountEndpoint {
+public class AccountEndpoint{
 
     @Autowired
     AccountService accountService;
 
     @PostConstruct
-    public void addAccountForTesting() {
+    public void addAccountForTesting(){
         Account account = accountService.getAccount( "davidopdebeeck@hotmail.com" );
 
-        if (account == null)
-            accountService.createAccount( "davidopdebeeck@hotmail.com" , "this-is-a-password" );
+        if( account == null )
+            accountService.createAccount( "davidopdebeeck@hotmail.com", "this-is-a-password" );
     }
 
-    @RequestMapping( method = RequestMethod.GET , produces = "application/json" )
-    public ResponseEntity<Account> get() {
+    @RequestMapping( method = RequestMethod.GET, produces = "application/json" )
+    public ResponseEntity<Account> get(){
         return new ResponseEntity<>( accountService.getAccount( "davidopdebeeck@hotmail.com" ), HttpStatus.OK );
     }
 
