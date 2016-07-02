@@ -1,8 +1,9 @@
-package be.plutus.core.account;
+package be.plutus.core.model.account;
 
+import be.plutus.common.crypto.Crypto;
 import be.plutus.common.identifiable.Identifiable;
 import be.plutus.common.validation.Whitelisted;
-import be.plutus.core.account.preferences.Preferences;
+import be.plutus.core.model.account.preferences.Preferences;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -27,6 +28,10 @@ public class Account extends Identifiable{
     @Column( name = "password" )
     private String password;
 
+    @NotBlank( message = "{NotBlank.Account.salt}" )
+    @Column( name = "salt" )
+    private String salt;
+
     @OneToMany( mappedBy = "account" , fetch = FetchType.EAGER )
     private List<User> users;
 
@@ -37,6 +42,11 @@ public class Account extends Identifiable{
     private Preferences preferences;
 
     public Account(){
+    }
+
+    public boolean isPasswordValid( String plainTextPassword )
+    {
+        return Crypto.createHash( plainTextPassword, salt ).equals( password );
     }
 
     public String getEmail(){
@@ -51,8 +61,9 @@ public class Account extends Identifiable{
         return password;
     }
 
-    public void setPassword( String password ){
-        this.password = password;
+    public void setPlainTextPassword( String plainTextPassword ){
+        this.salt = Crypto.createSalt();
+        this.password = Crypto.createHash( plainTextPassword, salt );
     }
 
     public List<User> getUsers(){

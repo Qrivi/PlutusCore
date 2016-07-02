@@ -1,6 +1,6 @@
-package be.plutus.repository;
+package be.plutus.core.repository;
 
-import be.plutus.core.account.Account;
+import be.plutus.core.model.account.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

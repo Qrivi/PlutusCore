@@ -1,4 +1,4 @@
-package be.plutus.core.account.preferences;
+package be.plutus.core.model.account.preferences;
 
 import be.plutus.common.identifiable.Identifiable;
 

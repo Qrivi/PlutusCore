@@ -1,4 +1,4 @@
-package be.plutus.core.location;
+package be.plutus.core.model.location;
 
 import be.plutus.common.identifiable.Identifiable;
 import org.hibernate.validator.constraints.NotBlank;

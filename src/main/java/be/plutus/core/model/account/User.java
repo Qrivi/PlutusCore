@@ -1,7 +1,7 @@
-package be.plutus.core.account;
+package be.plutus.core.model.account;
 
 import be.plutus.common.identifiable.Identifiable;
-import be.plutus.core.location.Institution;
+import be.plutus.core.model.location.Institution;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;

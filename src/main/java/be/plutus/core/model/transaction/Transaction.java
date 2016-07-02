@@ -1,9 +1,9 @@
-package be.plutus.core.transaction;
+package be.plutus.core.model.transaction;
 
 import be.plutus.common.identifiable.Identifiable;
-import be.plutus.core.account.User;
-import be.plutus.core.currency.Currency;
-import be.plutus.core.location.Location;
+import be.plutus.core.model.account.User;
+import be.plutus.core.model.currency.Currency;
+import be.plutus.core.model.location.Location;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;

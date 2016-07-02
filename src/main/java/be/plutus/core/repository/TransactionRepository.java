@@ -1,9 +1,9 @@
-package be.plutus.repository;
+package be.plutus.core.repository;
 
-import be.plutus.core.account.User;
-import be.plutus.core.location.Location;
-import be.plutus.core.transaction.Transaction;
-import be.plutus.core.transaction.TransactionType;
+import be.plutus.core.model.account.User;
+import be.plutus.core.model.location.Location;
+import be.plutus.core.model.transaction.Transaction;
+import be.plutus.core.model.transaction.TransactionType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package be.plutus.core.transaction;
+package be.plutus.core.model.transaction;
 
 public enum TransactionType{
     TOPUP,

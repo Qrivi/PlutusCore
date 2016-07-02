@@ -1,7 +1,7 @@
-package be.plutus.core.account;
+package be.plutus.core.model.account;
 
 import be.plutus.common.identifiable.Identifiable;
-import be.plutus.core.currency.Currency;
+import be.plutus.core.model.currency.Currency;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
