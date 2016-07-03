@@ -5,8 +5,6 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,13 +15,9 @@ public class Location extends Identifiable{
     @Column( name = "name" )
     private String name;
 
-    @Min( value = -90, message = "{Min.Location.lat}" )
-    @Max( value = 90, message = "{Max.Location.lat}" )
     @Column( name = "lat" )
     private double lat;
 
-    @Min( value = -180, message = "{Min.Location.lng}" )
-    @Max( value = 180, message = "{Max.Location.lng}" )
     @Column( name = "lng" )
     private double lng;
 
