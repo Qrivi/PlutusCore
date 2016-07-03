@@ -37,9 +37,9 @@ public class Campus extends Identifiable{
     @Column( name = "address" )
     private String address;
 
-    @NotNull( message = "{NotNull.Campus.zip}" )
+    @NotBlank( message = "{NotBlank.Campus.zip}" )
     @Column( name = "zip" )
-    private int zip;
+    private String zip;
 
     @NotBlank( message = "{NotBlank.Campus.city}" )
     @Column( name = "city" )
@@ -92,11 +92,11 @@ public class Campus extends Identifiable{
         this.address = address;
     }
 
-    public int getZip(){
+    public String getZip(){
         return zip;
     }
 
-    public void setZip( int zip ){
+    public void setZip( String zip ){
         this.zip = zip;
     }
 

@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `campus` (
   `lat` FLOAT NOT NULL,
   `lng` FLOAT NOT NULL,
   `address` VARCHAR(45) NOT NULL,
-  `zip` INT NOT NULL,
+  `zip` VARCHAR(45) NOT NULL,
   `city` VARCHAR(45) NOT NULL,
   `country` VARCHAR(45) NOT NULL,
   `institution_id` INT NOT NULL,
