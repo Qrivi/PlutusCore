@@ -50,6 +50,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
 
             if (isValid( token )) {
                 tokenService.extendToken( token );
+                tokenService.createRequest( token, request.getServletPath(), request.getRemoteAddr() );
                 Account account = token.getAccount();
                 SecurityContextHolder
                         .getContext()

@@ -2,7 +2,9 @@ package be.plutus.core.service;
 
 import be.plutus.core.config.Config;
 import be.plutus.core.model.account.Account;
+import be.plutus.core.model.token.Request;
 import be.plutus.core.model.token.Token;
+import be.plutus.core.repository.RequestRepository;
 import be.plutus.core.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class TokenServiceImpl implements TokenService{
     @Autowired
     TokenRepository tokenRepository;
 
+    @Autowired
+    RequestRepository requestRepository;
+
     @Override
     public Token getToken( String token ){
         return tokenRepository.findByToken( token );
@@ -32,6 +37,16 @@ public class TokenServiceImpl implements TokenService{
         token.setUserAgent( userAgent );
         token.setActive( true );
         return tokenRepository.save( token );
+    }
+
+    @Override
+    public Request createRequest( Token token, String endpoint, String ip ){
+        Request request = new Request();
+        request.setEndpoint( endpoint );
+        request.setIp( ip );
+        request.setTimestamp( new Date() );
+        request.setToken( token );
+        return requestRepository.save( request );
     }
 
     @Override

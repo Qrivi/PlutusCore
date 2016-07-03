@@ -1,6 +1,5 @@
 package be.plutus.core.model.token;
 
-import be.plutus.api.response.User;
 import be.plutus.common.identifiable.Identifiable;
 import be.plutus.core.model.account.Account;
 import org.hibernate.validator.constraints.NotBlank;
