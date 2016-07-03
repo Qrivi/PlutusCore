@@ -52,10 +52,6 @@ dependencies {
     compile "org.hibernate:hibernate-validator:$hibernateValidationVersion"
     compile "javax.el:javax.el-api:$javaxElVersion"
     compile "mysql:mysql-connector-java:$mysqlVersion"
-<<<<<<< Updated upstream
-    //compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-=======
->>>>>>> Stashed changes
     compile "org.mindrot:jbcrypt:$bCryptVersion"
 
     testCompile "junit:junit:4.11"
