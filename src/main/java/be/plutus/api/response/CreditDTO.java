@@ -1,10 +1,10 @@
 package be.plutus.api.response;
 
-public class Credit{
+public class CreditDTO{
 
     private double amount;
 
-    public Credit(  ){
+    public CreditDTO(  ){
     }
 
     public double getAmount(){

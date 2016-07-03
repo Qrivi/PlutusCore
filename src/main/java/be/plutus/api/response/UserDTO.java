@@ -2,14 +2,14 @@ package be.plutus.api.response;
 
 import be.plutus.core.model.location.Institution;
 
-public class User{
+public class UserDTO{
 
     private String firstName;
     private String lastName;
     private Institution institution;
     private String username;
 
-    public User(){
+    public UserDTO(){
     }
 
     public String getFirstName(){

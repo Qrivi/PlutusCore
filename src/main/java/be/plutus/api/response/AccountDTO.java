@@ -2,12 +2,12 @@ package be.plutus.api.response;
 
 import java.util.List;
 
-public class Account{
+public class AccountDTO{
 
     private String email;
     private List<User> users;
 
-    public Account( ){
+    public AccountDTO( ){
     }
 
     public String getEmail(){
