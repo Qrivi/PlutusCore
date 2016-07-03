@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                    .antMatchers( HttpMethod.POST, "/account" ).permitAll()
+                    .antMatchers( HttpMethod.POST, "/auth" ).permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .addFilterBefore(tokenAuthenticationFilter, BasicAuthenticationFilter.class)

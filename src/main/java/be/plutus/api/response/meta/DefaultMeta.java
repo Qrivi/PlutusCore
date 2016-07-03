@@ -2,7 +2,7 @@ package be.plutus.api.response.meta;
 
 import java.util.Date;
 
-public abstract class DefaultMeta{
+public class DefaultMeta{
 
     private int statusCode;
     private Date timestampRequest;
