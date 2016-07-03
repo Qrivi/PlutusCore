@@ -4,12 +4,21 @@ import be.plutus.core.model.location.Institution;
 
 public class UserDTO{
 
+    private int index;
     private String firstName;
     private String lastName;
     private Institution institution;
     private String username;
 
     public UserDTO(){
+    }
+
+    public int getIndex(){
+        return index;
+    }
+
+    public void setIndex( int index ){
+        this.index = index;
     }
 
     public String getFirstName(){
