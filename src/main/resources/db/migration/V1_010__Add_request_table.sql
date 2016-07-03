@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS `request` (
   `id` INT NOT NULL,
   `endpoint` VARCHAR(45) NOT NULL,
+  `method` VARCHAR(45) NOT NULL,
   `ip` VARCHAR(45) NOT NULL,
   `timestamp` DATETIME NOT NULL,
   `token_id` INT NOT NULL,

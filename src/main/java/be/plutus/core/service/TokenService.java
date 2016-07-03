@@ -12,7 +12,7 @@ public interface TokenService{
 
     Token createToken( Account account, String userAgent );
 
-    Request createRequest( Token token , String endpoint, String ip );
+    Request createRequest( String endpoint, String method, String ip, Token token );
 
     void extendToken( Token token );
 }

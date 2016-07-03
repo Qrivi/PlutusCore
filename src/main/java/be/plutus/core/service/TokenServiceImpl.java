@@ -40,9 +40,10 @@ public class TokenServiceImpl implements TokenService{
     }
 
     @Override
-    public Request createRequest( Token token, String endpoint, String ip ){
+    public Request createRequest( String endpoint, String method, String ip, Token token ){
         Request request = new Request();
         request.setEndpoint( endpoint );
+        request.setMethod( method );
         request.setIp( ip );
         request.setTimestamp( new Date() );
         request.setToken( token );

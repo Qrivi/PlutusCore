@@ -15,6 +15,10 @@ public class Request extends Identifiable{
     @Column( name = "endpoint" )
     private String endpoint;
 
+    @NotBlank( message = "{NotBlank.Request.method}" )
+    @Column( name = "method" )
+    private String method;
+
     @NotBlank( message = "{NotBlank.Request.ip}" )
     @Column( name = "ip" )
     private String ip;
@@ -37,6 +41,14 @@ public class Request extends Identifiable{
 
     public void setEndpoint( String endpoint ){
         this.endpoint = endpoint;
+    }
+
+    public String getMethod(){
+        return method;
+    }
+
+    public void setMethod( String method ){
+        this.method = method;
     }
 
     public String getIp(){
