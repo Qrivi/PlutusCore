@@ -28,6 +28,11 @@ public class Account extends Identifiable{
     @Column( name = "password" )
     private String password;
 
+    @NotNull( message = "{NotNull.Account.status}" )
+    @Column( name = "status" )
+    @Enumerated( EnumType.STRING )
+    private AccountStatus status;
+
     @OneToMany( mappedBy = "account", fetch = FetchType.EAGER )
     private List<User> users;
 
@@ -59,6 +64,14 @@ public class Account extends Identifiable{
     public void setPlainTextPassword( String plainTextPassword ){
         String salt = BCrypt.gensalt( 12 );
         this.password = BCrypt.hashpw( plainTextPassword, salt );
+    }
+
+    public AccountStatus getStatus(){
+        return status;
+    }
+
+    public void setStatus( AccountStatus status ){
+        this.status = status;
     }
 
     public List<User> getUsers(){

@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   `id` INT NOT NULL,
   `email` VARCHAR(80) NOT NULL,
   `password` VARCHAR(60) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
   `preferences_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),

@@ -1,6 +1,7 @@
 package be.plutus.core.service;
 
 import be.plutus.core.model.account.Account;
+import be.plutus.core.model.account.AccountStatus;
 import be.plutus.core.model.account.preferences.Preferences;
 import be.plutus.core.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class AccountServiceImpl implements AccountService{
         Account account = new Account();
         account.setEmail( email );
         account.setPlainTextPassword( password );
+        account.setStatus( AccountStatus.ACTIVE );
         account.setPreferences( new Preferences() );
         return accountRepository.save( account );
     }
