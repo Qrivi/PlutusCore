@@ -44,6 +44,7 @@ public class Transaction extends Identifiable{
     private Location location;
 
     @NotNull( message = "{NotNull.Transaction.timestamp}" )
+    @Column( name = "timestamp" )
     @Temporal( TemporalType.TIMESTAMP )
     private Date timestamp;
 

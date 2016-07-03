@@ -19,9 +19,9 @@ public class Request extends Identifiable{
     @Column( name = "ip" )
     private String ip;
 
-    @Temporal( value = TemporalType.TIMESTAMP )
     @NotNull( message = "{NotNull.Request.timestamp}" )
     @Column( name = "timestamp" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date timestamp;
 
     @ManyToOne

@@ -27,9 +27,9 @@ public class Token extends Identifiable{
     @Column( name = "user_agent" )
     private String userAgent;
 
-    @Temporal( value = TemporalType.TIMESTAMP )
     @NotNull( message = "{NotNull.Token.expiryDate}" )
     @Column( name = "expiry_date" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date expiryDate;
 
     @Column( name = "active" )
