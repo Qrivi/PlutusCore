@@ -45,6 +45,7 @@ bootRepackage {
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.data:spring-data-jpa:$springDataVersion"
     compile "org.hibernate:hibernate-core:$hibernatEMVersion"
     compile "org.hibernate:hibernate-entitymanager:$hibernatEMVersion"
