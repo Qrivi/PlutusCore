@@ -1,6 +1,7 @@
 package be.plutus.api.security;
 
 import be.plutus.core.model.account.Account;
+import be.plutus.core.model.account.AccountStatus;
 import be.plutus.core.model.token.Token;
 import be.plutus.core.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,16 +52,20 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
             if (isValid( token )) {
                 tokenService.extendToken( token );
                 tokenService.createRequest( request.getServletPath(), request.getMethod(), request.getRemoteAddr(), token );
+
                 Account account = token.getAccount();
-                SecurityContextHolder
-                        .getContext()
-                        .setAuthentication(
-                                new UsernamePasswordAuthenticationToken(
-                                        account.getEmail(),
-                                        account.getPassword(),
-                                        Collections.singletonList( ( () -> "ROLE_BASIC" ) )
-                                )
-                        );
+
+                if (isValid( account )) {
+                    SecurityContextHolder
+                            .getContext()
+                            .setAuthentication(
+                                    new UsernamePasswordAuthenticationToken(
+                                            account.getEmail(),
+                                            account.getPassword(),
+                                            Collections.singletonList( ( () -> "ROLE_BASIC" ) )
+                                    )
+                            );
+                }
             }
         }
 
@@ -75,4 +80,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
         return token != null && token.isActive() && token.getExpiryDate().getTime() > new Date().getTime();
     }
 
+    private boolean isValid( Account account ){
+        return account != null && account.getStatus() == AccountStatus.ACTIVE;
+    }
 }
