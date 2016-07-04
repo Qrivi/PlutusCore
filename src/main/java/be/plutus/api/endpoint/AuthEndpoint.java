@@ -1,25 +1,31 @@
 package be.plutus.api.endpoint;
 
+import be.plutus.api.request.AuthenticationDTO;
 import be.plutus.api.response.Response;
 import be.plutus.api.response.TokenDTO;
 import be.plutus.api.response.meta.DefaultMeta;
+import be.plutus.api.util.MessageService;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.token.Token;
 import be.plutus.core.service.AccountService;
 import be.plutus.core.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
+import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping( "/auth" )
+@RequestMapping(
+        name = "/auth" ,
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE )
 public class AuthEndpoint{
 
     @Autowired
@@ -27,6 +33,9 @@ public class AuthEndpoint{
 
     @Autowired
     TokenService tokenService;
+
+    @Autowired
+    MessageService messageService;
 
     @PostConstruct
     public void addAccountForTesting(){
@@ -36,21 +45,37 @@ public class AuthEndpoint{
             accountService.createAccount( "davidopdebeeck@hotmail.com", "this-is-a-password" );
     }
 
-    @RequestMapping( method = RequestMethod.POST, produces = "application/json" )
-    public ResponseEntity<Response<DefaultMeta, TokenDTO>> post( @RequestHeader( value = "User-Agent", required = false ) String userAgent){
-        Account account = accountService.getAccount( "davidopdebeeck@hotmail.com" );
-        Token token = tokenService.createToken( account, userAgent );
-
+    @RequestMapping( method = RequestMethod.POST )
+    public ResponseEntity<Response<DefaultMeta, TokenDTO>> post(
+            @Valid @RequestBody AuthenticationDTO dto,
+            BindingResult bindingResult,
+            @RequestHeader( value = "User-Agent", required = false ) String userAgent ){
         Response<DefaultMeta, TokenDTO> response = new Response<>();
 
-        DefaultMeta meta = new DefaultMeta();
-        meta.setStatusCode( 200 );
-        meta.setTimestampRequest( new Date() );
+        if (bindingResult.hasErrors()){
+            response.setMeta( DefaultMeta.badRequest() );
+            response.setErrors( bindingResult.getAllErrors()
+                    .stream()
+                    .map( DefaultMessageSourceResolvable::getDefaultMessage )
+                    .collect( Collectors.toList() )
+            );
+            return new ResponseEntity<>( response, HttpStatus.BAD_REQUEST );
+        }
+
+        Account account = accountService.getAccount( dto.getEmail() );
+
+        if (!account.isPasswordValid( dto.getPassword() )){
+            response.setMeta( DefaultMeta.badRequest() );
+            response.setErrors( messageService.get( "NotValid.AuthEndpoint.password" ) );
+            return new ResponseEntity<>( response, HttpStatus.BAD_REQUEST );
+        }
+
+        Token token = tokenService.createToken( account, userAgent );
 
         TokenDTO tokenDTO = new TokenDTO();
         tokenDTO.setToken( token.getToken() );
 
-        response.setMeta( meta );
+        response.setMeta( DefaultMeta.success() );
         response.setData( tokenDTO );
 
         return new ResponseEntity<>( response, HttpStatus.OK );

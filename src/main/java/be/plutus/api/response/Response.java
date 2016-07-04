@@ -2,18 +2,25 @@ package be.plutus.api.response;
 
 import be.plutus.api.response.meta.DefaultMeta;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 public class Response<M extends DefaultMeta, O extends Object>{
 
-    private String error;
+    private Collection<String> errors;
     private M meta;
     private O data;
 
-    public String getError(){
-        return error;
+    public Collection<String> getErrors(){
+        return errors;
     }
 
-    public void setError( String error ){
-        this.error = error;
+    public void setErrors( Collection<String> errors ){
+        this.errors = errors;
+    }
+
+    public void setErrors( String... errors ){
+        this.errors = Arrays.asList( errors );
     }
 
     public M getMeta(){

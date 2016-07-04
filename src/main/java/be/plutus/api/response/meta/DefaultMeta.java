@@ -22,4 +22,32 @@ public class DefaultMeta{
     public void setTimestampRequest( Date timestampRequest ){
         this.timestampRequest = timestampRequest;
     }
+
+    public static DefaultMeta success(){
+        DefaultMeta meta = new DefaultMeta();
+        meta.setStatusCode( 200 );
+        meta.setTimestampRequest( new Date() );
+        return meta;
+    }
+
+    public static DefaultMeta badRequest(){
+        DefaultMeta meta = new DefaultMeta();
+        meta.setStatusCode( 400 );
+        meta.setTimestampRequest( new Date() );
+        return meta;
+    }
+
+    public static DefaultMeta serverError(){
+        DefaultMeta meta = new DefaultMeta();
+        meta.setStatusCode( 500 );
+        meta.setTimestampRequest( new Date() );
+        return meta;
+    }
+
+    public static DefaultMeta notFound(){
+        DefaultMeta meta = new DefaultMeta();
+        meta.setStatusCode( 404 );
+        meta.setTimestampRequest( new Date() );
+        return meta;
+    }
 }

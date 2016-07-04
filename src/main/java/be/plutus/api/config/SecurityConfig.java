@@ -1,5 +1,6 @@
-package be.plutus.api.security;
+package be.plutus.api.config;
 
+import be.plutus.api.security.TokenAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
