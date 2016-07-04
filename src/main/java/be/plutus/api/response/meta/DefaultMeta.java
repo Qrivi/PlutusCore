@@ -37,6 +37,20 @@ public class DefaultMeta{
         return meta;
     }
 
+    public static DefaultMeta unauthorized(){
+        DefaultMeta meta = new DefaultMeta();
+        meta.setStatusCode( 401 );
+        meta.setTimestampRequest( new Date() );
+        return meta;
+    }
+
+    public static DefaultMeta forbidden(){
+        DefaultMeta meta = new DefaultMeta();
+        meta.setStatusCode( 403 );
+        meta.setTimestampRequest( new Date() );
+        return meta;
+    }
+
     public static DefaultMeta serverError(){
         DefaultMeta meta = new DefaultMeta();
         meta.setStatusCode( 500 );
