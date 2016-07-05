@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,29 +24,28 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 
-@Component
 public class TokenAuthenticationFilter extends GenericFilterBean{
 
     private static String PARAMETER_SECURITY_TOKEN = "token";
     private static String HEADER_SECURITY_TOKEN = "X-Auth-Token";
 
-    @Autowired
-    TokenService tokenService;
+    private TokenService tokenService;
+    private AuthenticationEntryPoint entryPoint;
 
-    @Autowired
-    AuthenticationEntryPoint entryPoint;
+    public TokenAuthenticationFilter(TokenService tokenService, AuthenticationEntryPoint entryPoint){
+        this.tokenService = tokenService;
+        this.entryPoint = entryPoint;
+    }
 
     @Override
     public void doFilter( ServletRequest req, ServletResponse res, FilterChain chain ) throws IOException, ServletException{
         HttpServletRequest request = (HttpServletRequest)req;
         HttpServletResponse response = (HttpServletResponse)res;
-
         try{
             String tokenHeader = request.getHeader( HEADER_SECURITY_TOKEN );
             String tokenParameter = request.getParameter( PARAMETER_SECURITY_TOKEN );
 
-            //TODO check whether second condition can be omitted here
-            if( SecurityContextHolder.getContext().getAuthentication() == null && !request.getServletPath().equals( "/auth" ) ){
+            if( SecurityContextHolder.getContext().getAuthentication() == null ){
 
                 Token token = null;
 
