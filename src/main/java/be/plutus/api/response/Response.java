@@ -15,12 +15,12 @@ public class Response<M extends DefaultMeta, O extends Object>{
         return errors;
     }
 
-    public void setErrors( Collection<String> errors ){
-        this.errors = errors;
-    }
-
     public void setErrors( String... errors ){
         this.errors = Arrays.asList( errors );
+    }
+
+    public void setErrors( Collection<String> errors ){
+        this.errors = errors;
     }
 
     public M getMeta(){

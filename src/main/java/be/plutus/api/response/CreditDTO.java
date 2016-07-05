@@ -4,7 +4,7 @@ public class CreditDTO{
 
     private double amount;
 
-    public CreditDTO(  ){
+    public CreditDTO(){
     }
 
     public double getAmount(){

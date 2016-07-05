@@ -7,7 +7,7 @@ public class AccountDTO{
     private String email;
     private List<UserDTO> users;
 
-    public AccountDTO( ){
+    public AccountDTO(){
     }
 
     public String getEmail(){

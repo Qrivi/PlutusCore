@@ -9,7 +9,7 @@ public class CreditMeta{
     private Currency currency;
     private Date timestampFetched;
 
-    public CreditMeta( ){
+    public CreditMeta(){
     }
 
     public Currency getCurrency(){

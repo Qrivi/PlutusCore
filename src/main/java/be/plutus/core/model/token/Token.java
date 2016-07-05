@@ -15,13 +15,13 @@ import java.util.Set;
 public class Token extends Identifiable{
 
     @Valid
-    @NotNull( message = "{NotNull.Token.account}")
+    @NotNull( message = "{NotNull.Token.account}" )
     @ManyToOne
     @JoinColumn( name = "account_id" )
     private Account account;
 
     @NotBlank( message = "{NotBlank.Token.token}" )
-    @Column( name = "token" , unique = true )
+    @Column( name = "token", unique = true )
     private String token;
 
     @Column( name = "user_agent" )

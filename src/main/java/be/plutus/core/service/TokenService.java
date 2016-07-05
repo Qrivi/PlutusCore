@@ -4,8 +4,6 @@ import be.plutus.core.model.account.Account;
 import be.plutus.core.model.token.Request;
 import be.plutus.core.model.token.Token;
 
-import java.util.Date;
-
 public interface TokenService{
 
     Token getToken( String token );

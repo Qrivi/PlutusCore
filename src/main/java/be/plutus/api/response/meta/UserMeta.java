@@ -4,7 +4,7 @@ public class UserMeta{
 
     private String username;
 
-    public UserMeta(  ){
+    public UserMeta(){
     }
 
     public String getUsername(){

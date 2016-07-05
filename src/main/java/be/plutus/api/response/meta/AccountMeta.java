@@ -1,6 +1,6 @@
 package be.plutus.api.response.meta;
 
-public class AccountMeta extends  DefaultMeta{
+public class AccountMeta extends DefaultMeta{
     private String email;
 
     public AccountMeta(){

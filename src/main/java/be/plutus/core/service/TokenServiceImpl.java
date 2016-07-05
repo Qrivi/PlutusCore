@@ -33,7 +33,7 @@ public class TokenServiceImpl implements TokenService{
         Token token = new Token();
         token.setAccount( account );
         token.setToken( UUID.randomUUID().toString() );
-        token.setExpiryDate( new Date((new Date()).getTime() + Config.DEFAULT_TOKEN_TTL) );
+        token.setExpiryDate( new Date( ( new Date() ).getTime() + Config.DEFAULT_TOKEN_TTL ) );
         token.setUserAgent( userAgent );
         token.setActive( true );
         return tokenRepository.save( token );
@@ -52,7 +52,7 @@ public class TokenServiceImpl implements TokenService{
 
     @Override
     public void extendToken( Token token ){
-        token.setExpiryDate( new Date((new Date()).getTime() + Config.DEFAULT_TOKEN_TTL) );
+        token.setExpiryDate( new Date( ( new Date() ).getTime() + Config.DEFAULT_TOKEN_TTL ) );
         tokenRepository.save( token );
     }
 }

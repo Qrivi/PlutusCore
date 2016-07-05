@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Bean
-    public MessageSource messageSource() {
+    public MessageSource messageSource(){
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasenames( "classpath:messages" );
         messageSource.setDefaultEncoding( "UTF-8" );
@@ -24,9 +24,9 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     }
 
     @Override
-    public Validator getValidator() {
+    public Validator getValidator(){
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(messageSource());
+        validator.setValidationMessageSource( messageSource() );
         return validator;
     }
 }

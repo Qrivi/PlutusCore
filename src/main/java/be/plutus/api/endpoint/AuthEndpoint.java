@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(
-        path = "/auth" ,
+        path = "/auth",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE )
 public class AuthEndpoint{
@@ -53,7 +53,7 @@ public class AuthEndpoint{
             @RequestHeader( value = "User-Agent", required = false ) String userAgent ){
         Response<DefaultMeta, TokenDTO> response = new Response<>();
 
-        if (bindingResult.hasErrors()){
+        if( bindingResult.hasErrors() ){
             response.setMeta( DefaultMeta.badRequest() );
             response.setErrors( bindingResult.getAllErrors()
                     .stream()
@@ -65,19 +65,19 @@ public class AuthEndpoint{
 
         Account account = accountService.getAccount( dto.getEmail() );
 
-        if (account == null){
+        if( account == null ){
             response.setMeta( DefaultMeta.badRequest() );
             response.setErrors( messageService.get( "NotValid.AuthEndpoint.email" ) );
             return new ResponseEntity<>( response, HttpStatus.BAD_REQUEST );
         }
 
-        if (!account.isPasswordValid( dto.getPassword() )){
+        if( !account.isPasswordValid( dto.getPassword() ) ){
             response.setMeta( DefaultMeta.badRequest() );
             response.setErrors( messageService.get( "NotValid.AuthEndpoint.password" ) );
             return new ResponseEntity<>( response, HttpStatus.BAD_REQUEST );
         }
 
-        if (account.getStatus() != AccountStatus.ACTIVE){
+        if( account.getStatus() != AccountStatus.ACTIVE ){
             response.setMeta( DefaultMeta.forbidden() );
             response.setErrors( account.getStatus().getStatus() );
             return new ResponseEntity<>( response, HttpStatus.FORBIDDEN );

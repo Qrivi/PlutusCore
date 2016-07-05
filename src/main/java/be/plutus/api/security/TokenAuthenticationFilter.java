@@ -37,18 +37,19 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
 
     @Override
     public void doFilter( ServletRequest req, ServletResponse res, FilterChain chain ) throws IOException, ServletException{
-        HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) res;
+        HttpServletRequest request = (HttpServletRequest)req;
+        HttpServletResponse response = (HttpServletResponse)res;
 
         try{
             String tokenHeader = request.getHeader( HEADER_SECURITY_TOKEN );
             String tokenParameter = request.getParameter( PARAMETER_SECURITY_TOKEN );
 
-            if( SecurityContextHolder.getContext().getAuthentication() == null && !request.getServletPath().equals( "/auth" )){
+            //TODO check whether second condition can be omitted here
+            if( SecurityContextHolder.getContext().getAuthentication() == null && !request.getServletPath().equals( "/auth" ) ){
 
                 Token token = null;
 
-                if (tokenHeader == null && tokenParameter == null)
+                if( tokenHeader == null && tokenParameter == null )
                     throw new TokenNotFoundException( "TokenNotFoundException" );
 
                 if( tokenHeader != null )
@@ -78,7 +79,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
             }
 
             chain.doFilter( request, response );
-        } catch( AuthenticationException e ){
+        }catch( AuthenticationException e ){
             entryPoint.commence( request, response, e );
         }
     }
@@ -88,19 +89,19 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
     }
 
     private boolean isValid( Token token ){
-        if (token == null)
+        if( token == null )
             throw new TokenInvalidException( "TokenInvalidException" );
-        if (!token.isActive())
+        if( !token.isActive() )
             throw new TokenNotActiveException( "TokenNotActiveException" );
-        if (token.getExpiryDate().getTime() < new Date().getTime())
+        if( token.getExpiryDate().getTime() < new Date().getTime() )
             throw new TokenExpiredException( "TokenExpiredException" );
         return true;
     }
 
     private boolean isValid( Account account ){
-        if (account == null)
+        if( account == null )
             throw new AccountNotFoundException( "AccountNotFoundException" );
-        if (account.getStatus() != AccountStatus.ACTIVE)
+        if( account.getStatus() != AccountStatus.ACTIVE )
             throw new AccountNotActiveException( "AccountNotActiveException" );
         return true;
     }

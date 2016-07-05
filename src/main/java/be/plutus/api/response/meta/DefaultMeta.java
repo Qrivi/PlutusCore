@@ -7,22 +7,6 @@ public class DefaultMeta{
     private int statusCode;
     private Date timestampRequest;
 
-    public int getStatusCode(){
-        return statusCode;
-    }
-
-    public void setStatusCode( int statusCode ){
-        this.statusCode = statusCode;
-    }
-
-    public Date getTimestampRequest(){
-        return timestampRequest;
-    }
-
-    public void setTimestampRequest( Date timestampRequest ){
-        this.timestampRequest = timestampRequest;
-    }
-
     public static DefaultMeta success(){
         DefaultMeta meta = new DefaultMeta();
         meta.setStatusCode( 200 );
@@ -63,5 +47,21 @@ public class DefaultMeta{
         meta.setStatusCode( 404 );
         meta.setTimestampRequest( new Date() );
         return meta;
+    }
+
+    public int getStatusCode(){
+        return statusCode;
+    }
+
+    public void setStatusCode( int statusCode ){
+        this.statusCode = statusCode;
+    }
+
+    public Date getTimestampRequest(){
+        return timestampRequest;
+    }
+
+    public void setTimestampRequest( Date timestampRequest ){
+        this.timestampRequest = timestampRequest;
     }
 }

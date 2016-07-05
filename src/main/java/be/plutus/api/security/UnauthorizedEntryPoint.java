@@ -1,8 +1,6 @@
 package be.plutus.api.security;
 
-import be.plutus.api.response.AccountDTO;
 import be.plutus.api.response.Response;
-import be.plutus.api.response.meta.AccountMeta;
 import be.plutus.api.response.meta.DefaultMeta;
 import be.plutus.api.util.MessageService;
 import com.fasterxml.jackson.databind.ObjectMapper;

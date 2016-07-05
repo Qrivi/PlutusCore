@@ -12,7 +12,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity( prePostEnabled = true )
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
@@ -23,20 +23,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private TokenAuthenticationFilter tokenAuthenticationFilter;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure( HttpSecurity http ) throws Exception{
         http
-            .authorizeRequests()
-            .antMatchers( "/auth" ).permitAll()
-            .anyRequest().authenticated()
-        .and()
-            .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .sessionManagement()
-            .sessionCreationPolicy( SessionCreationPolicy.STATELESS )
-        .and()
-            .exceptionHandling()
-            .authenticationEntryPoint( entryPoint )
-        .and()
-            .httpBasic().disable()
-            .csrf().disable();
+                .authorizeRequests()
+                .antMatchers( "/auth" ).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .addFilterBefore( tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class )
+                .sessionManagement()
+                .sessionCreationPolicy( SessionCreationPolicy.STATELESS )
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint( entryPoint )
+                .and()
+                .httpBasic().disable()
+                .csrf().disable();
     }
 }
