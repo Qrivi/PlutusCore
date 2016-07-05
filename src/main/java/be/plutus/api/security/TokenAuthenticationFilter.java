@@ -1,14 +1,15 @@
 package be.plutus.api.security;
 
+import be.plutus.api.security.exception.*;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
 import be.plutus.core.model.token.Token;
 import be.plutus.core.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -31,45 +32,55 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
     @Autowired
     TokenService tokenService;
 
+    @Autowired
+    AuthenticationEntryPoint entryPoint;
+
     @Override
     public void doFilter( ServletRequest req, ServletResponse res, FilterChain chain ) throws IOException, ServletException{
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        String tokenHeader = request.getHeader( HEADER_SECURITY_TOKEN );
-        String tokenParameter = request.getParameter( PARAMETER_SECURITY_TOKEN );
+        try{
+            String tokenHeader = request.getHeader( HEADER_SECURITY_TOKEN );
+            String tokenParameter = request.getParameter( PARAMETER_SECURITY_TOKEN );
 
-        if ( SecurityContextHolder.getContext().getAuthentication() == null) {
+            if( SecurityContextHolder.getContext().getAuthentication() == null && !request.getServletPath().equals( "/auth" )){
 
-            Token token = null;
+                Token token = null;
 
-            if (tokenHeader != null)
-                token = getToken(tokenHeader);
+                if (tokenHeader == null && tokenParameter == null)
+                    throw new TokenNotFoundException( "TokenNotFoundException" );
 
-            if (tokenParameter != null)
-                token = getToken(tokenParameter);
+                if( tokenHeader != null )
+                    token = getToken( tokenHeader );
 
-            if (isValid( token )) {
-                tokenService.extendToken( token );
-                tokenService.createRequest( request.getServletPath(), request.getMethod(), request.getRemoteAddr(), token );
+                if( tokenParameter != null )
+                    token = getToken( tokenParameter );
 
-                Account account = token.getAccount();
+                if( isValid( token ) ){
+                    tokenService.extendToken( token );
+                    tokenService.createRequest( request.getServletPath(), request.getMethod(), request.getRemoteAddr(), token );
 
-                if (isValid( account )) {
-                    SecurityContextHolder
-                            .getContext()
-                            .setAuthentication(
-                                    new UsernamePasswordAuthenticationToken(
-                                            account.getEmail(),
-                                            account.getPassword(),
-                                            Collections.singletonList( ( () -> "ROLE_BASIC" ) )
-                                    )
-                            );
+                    Account account = token.getAccount();
+
+                    if( isValid( account ) ){
+                        SecurityContextHolder
+                                .getContext()
+                                .setAuthentication(
+                                        new UsernamePasswordAuthenticationToken(
+                                                account.getEmail(),
+                                                account.getPassword(),
+                                                Collections.singletonList( ( () -> "ROLE_BASIC" ) )
+                                        )
+                                );
+                    }
                 }
             }
-        }
 
-        chain.doFilter(request, response);
+            chain.doFilter( request, response );
+        } catch( AuthenticationException e ){
+            entryPoint.commence( request, response, e );
+        }
     }
 
     private Token getToken( String tokenString ){
@@ -77,10 +88,20 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
     }
 
     private boolean isValid( Token token ){
-        return token != null && token.isActive() && token.getExpiryDate().getTime() > new Date().getTime();
+        if (token == null)
+            throw new TokenInvalidException( "TokenInvalidException" );
+        if (!token.isActive())
+            throw new TokenNotActiveException( "TokenNotActiveException" );
+        if (token.getExpiryDate().getTime() < new Date().getTime())
+            throw new TokenExpiredException( "TokenExpiredException" );
+        return true;
     }
 
     private boolean isValid( Account account ){
-        return account != null && account.getStatus() == AccountStatus.ACTIVE;
+        if (account == null)
+            throw new AccountNotFoundException( "AccountNotFoundException" );
+        if (account.getStatus() != AccountStatus.ACTIVE)
+            throw new AccountNotActiveException( "AccountNotActiveException" );
+        return true;
     }
 }

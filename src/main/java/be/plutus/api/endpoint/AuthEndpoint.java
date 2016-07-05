@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,14 @@ public class AuthEndpoint{
 
     @Autowired
     MessageService messageService;
+
+    @PostConstruct
+    public void addAccountForTesting(){
+        Account account = accountService.getAccount( "davidopdebeeck@hotmail.com" );
+
+        if( account == null )
+            accountService.createAccount( "davidopdebeeck@hotmail.com", "this-is-a-password" );
+    }
 
     @RequestMapping( method = RequestMethod.POST )
     public ResponseEntity<Response<DefaultMeta, TokenDTO>> post(
