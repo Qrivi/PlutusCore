@@ -21,6 +21,9 @@ public class Institution extends Identifiable{
     @Column( name = "slur", unique = true )
     private String slur;
 
+    @Column( name = "hint" )
+    private String hint;
+
     public Institution(){
     }
 
@@ -43,5 +46,13 @@ public class Institution extends Identifiable{
 
     public void setSlur( String slur ){
         this.slur = slur;
+    }
+
+    public String getHint(){
+        return hint;
+    }
+
+    public void setHint( String hint ){
+        this.hint = hint;
     }
 }

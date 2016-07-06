@@ -11,13 +11,13 @@ import java.util.Date;
 @Table( name = "request" )
 public class Request extends Identifiable{
 
-    @NotBlank( message = "{NotBlank.Request.endpoint}" )
-    @Column( name = "endpoint" )
-    private String endpoint;
-
     @NotBlank( message = "{NotBlank.Request.method}" )
     @Column( name = "method" )
     private String method;
+
+    @NotBlank( message = "{NotBlank.Request.endpoint}" )
+    @Column( name = "endpoint" )
+    private String endpoint;
 
     @NotBlank( message = "{NotBlank.Request.ip}" )
     @Column( name = "ip" )
@@ -35,20 +35,20 @@ public class Request extends Identifiable{
     public Request(){
     }
 
-    public String getEndpoint(){
-        return endpoint;
-    }
-
-    public void setEndpoint( String endpoint ){
-        this.endpoint = endpoint;
-    }
-
     public String getMethod(){
         return method;
     }
 
     public void setMethod( String method ){
         this.method = method;
+    }
+
+    public String getEndpoint(){
+        return endpoint;
+    }
+
+    public void setEndpoint( String endpoint ){
+        this.endpoint = endpoint;
     }
 
     public String getIp(){

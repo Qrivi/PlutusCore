@@ -28,9 +28,9 @@ public class Token extends Identifiable{
     @Column( name = "application_name" )
     private String applicationName;
 
-    @NotBlank( message = "{NotBlank.Token.device}" )
-    @Column( name = "device" )
-    private String device;
+    @NotBlank( message = "{NotBlank.Token.deviceName}" )
+    @Column( name = "device_name" )
+    private String deviceName;
 
     @NotBlank( message = "{NotBlank.Token.requestIp}" )
     @Column( name = "request_ip" )
@@ -41,10 +41,10 @@ public class Token extends Identifiable{
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date expiryDate;
 
-    @NotNull( message = "{NotNull.Token.createdOn}" )
-    @Column( name = "created_on" )
+    @NotNull( message = "{NotNull.Token.creationDate}" )
+    @Column( name = "creation_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
-    private Date createdOn;
+    private Date creationDate;
 
     @Column( name = "active" )
     private boolean active;
@@ -75,16 +75,16 @@ public class Token extends Identifiable{
         return applicationName;
     }
 
-    public void setApplicationName( String userAgent ){
-        this.applicationName = userAgent;
+    public void setApplicationName( String applicationName ){
+        this.applicationName = applicationName;
     }
 
-    public String getDevice(){
-        return device;
+    public String getDeviceName(){
+        return deviceName;
     }
 
-    public void setDevice( String device ){
-        this.device = device;
+    public void setDeviceName( String deviceName ){
+        this.deviceName = deviceName;
     }
 
     public String getRequestIp(){
@@ -103,12 +103,12 @@ public class Token extends Identifiable{
         this.expiryDate = expiryDate;
     }
 
-    public Date getCreatedOn(){
-        return createdOn;
+    public Date getCreationDate(){
+        return creationDate;
     }
 
-    public void setCreatedOn( Date createdDate ){
-        this.createdOn = createdDate;
+    public void setCreationDate( Date creationDate ){
+        this.creationDate = creationDate;
     }
 
     public boolean isActive(){

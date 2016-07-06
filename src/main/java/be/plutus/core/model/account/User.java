@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Table( name = "user" )
@@ -39,6 +40,11 @@ public class User extends Identifiable{
     @OneToOne( cascade = CascadeType.ALL, orphanRemoval = true )
     @JoinColumn( name = "credit_id" )
     private Credit credit;
+
+    @NotNull( message = "{NotNull.User.fetchDate}" )
+    @Column( name = "fetch_date" )
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date fetchDate;
 
     @Valid
     @ManyToOne
@@ -94,6 +100,14 @@ public class User extends Identifiable{
 
     public void setCredit( Credit credit ){
         this.credit = credit;
+    }
+
+    public Date getFetchDate(){
+        return fetchDate;
+    }
+
+    public void setFetchDate( Date fetchDate ){
+        this.fetchDate = fetchDate;
     }
 
     public Account getAccount(){
