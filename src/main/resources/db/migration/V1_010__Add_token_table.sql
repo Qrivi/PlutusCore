@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `token` (
   `id` INT NOT NULL,
   `token` VARCHAR(255) NOT NULL,
-  `user_agent` VARCHAR(255),
+  `application_name` VARCHAR(255) NOT NULL,
   `expiry_date` DATETIME NOT NULL,
   `created_on` DATETIME NOT NULL,
   `active` TINYINT(1) NOT NULL,

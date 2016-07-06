@@ -24,8 +24,9 @@ public class Token extends Identifiable{
     @Column( name = "token", unique = true )
     private String token;
 
-    @Column( name = "user_agent" )
-    private String userAgent;
+    @NotBlank( message = "{NotBlank.Token.applicationName}" )
+    @Column( name = "application_name" )
+    private String applicationName;
 
     @NotNull( message = "{NotNull.Token.expiryDate}" )
     @Column( name = "expiry_date" )
@@ -62,12 +63,12 @@ public class Token extends Identifiable{
         this.token = token;
     }
 
-    public String getUserAgent(){
-        return userAgent;
+    public String getApplicationName(){
+        return applicationName;
     }
 
-    public void setUserAgent( String userAgent ){
-        this.userAgent = userAgent;
+    public void setApplicationName( String userAgent ){
+        this.applicationName = userAgent;
     }
 
     public Date getExpiryDate(){

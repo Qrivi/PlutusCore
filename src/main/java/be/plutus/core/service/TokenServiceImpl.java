@@ -29,13 +29,13 @@ public class TokenServiceImpl implements TokenService{
     }
 
     @Override
-    public Token createToken( Account account, String userAgent ){
+    public Token createToken( Account account, String applicationName ){
         Token token = new Token();
         token.setAccount( account );
         token.setToken( UUID.randomUUID().toString() );
         token.setCreatedOn( new Date() );
         token.setExpiryDate( new Date( ( new Date() ).getTime() + Config.DEFAULT_TOKEN_TTL ) );
-        token.setUserAgent( userAgent );
+        token.setApplicationName( applicationName );
         token.setActive( true );
         return tokenRepository.save( token );
     }
