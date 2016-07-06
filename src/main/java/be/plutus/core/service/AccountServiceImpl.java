@@ -3,10 +3,13 @@ package be.plutus.core.service;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
 import be.plutus.core.model.account.preferences.Preferences;
+import be.plutus.core.model.currency.Currency;
 import be.plutus.core.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 @Service
 @Transactional
@@ -31,6 +34,8 @@ public class AccountServiceImpl implements AccountService{
         account.setEmail( email );
         account.setPlainTextPassword( password );
         account.setStatus( AccountStatus.ACTIVE );
+        account.setCreationDate( new Date() );
+        account.setDefaultCurrency( Currency.EUR );
         account.setPreferences( new Preferences() );
         return accountRepository.save( account );
     }
