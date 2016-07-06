@@ -33,10 +33,10 @@ public class TokenServiceImpl implements TokenService{
         Token token = new Token();
         token.setAccount( account );
         token.setToken( UUID.randomUUID().toString() );
-        token.setCreatedOn( new Date() );
+        token.setCreationDate( new Date() );
         token.setExpiryDate( new Date( ( new Date() ).getTime() + Config.DEFAULT_TOKEN_TTL ) );
         token.setApplicationName( applicationName );
-        token.setDevice( device );
+        token.setDeviceName( device );
         token.setRequestIp( requestIp );
         token.setActive( true );
         return tokenRepository.save( token );
