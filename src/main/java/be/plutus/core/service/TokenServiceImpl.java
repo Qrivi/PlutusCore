@@ -33,6 +33,7 @@ public class TokenServiceImpl implements TokenService{
         Token token = new Token();
         token.setAccount( account );
         token.setToken( UUID.randomUUID().toString() );
+        token.setCreatedOn( new Date() );
         token.setExpiryDate( new Date( ( new Date() ).getTime() + Config.DEFAULT_TOKEN_TTL ) );
         token.setUserAgent( userAgent );
         token.setActive( true );

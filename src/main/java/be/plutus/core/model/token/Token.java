@@ -32,6 +32,11 @@ public class Token extends Identifiable{
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date expiryDate;
 
+    @NotNull( message = "{NotNull.Token.createdOn}" )
+    @Column( name = "created_on" )
+    @Temporal( value = TemporalType.TIMESTAMP )
+    private Date createdOn;
+
     @Column( name = "active" )
     private boolean active;
 
@@ -71,6 +76,14 @@ public class Token extends Identifiable{
 
     public void setExpiryDate( Date expiryDate ){
         this.expiryDate = expiryDate;
+    }
+
+    public Date getCreatedOn(){
+        return createdOn;
+    }
+
+    public void setCreatedOn( Date createdDate ){
+        this.createdOn = createdDate;
     }
 
     public boolean isActive(){
