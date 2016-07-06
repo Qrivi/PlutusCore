@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS `token` (
   `id` INT NOT NULL,
   `token` VARCHAR(255) NOT NULL,
   `application_name` VARCHAR(255) NOT NULL,
+  `device` VARCHAR(255) NOT NULL,
+  `request_ip` VARCHAR(45) NOT NULL,
   `expiry_date` DATETIME NOT NULL,
   `created_on` DATETIME NOT NULL,
   `active` TINYINT(1) NOT NULL,

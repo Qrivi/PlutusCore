@@ -8,7 +8,7 @@ public interface TokenService{
 
     Token getToken( String token );
 
-    Token createToken( Account account, String applicationName );
+    Token createToken( Account account, String applicationName , String device , String requestIp );
 
     Request createRequest( String endpoint, String method, String ip, Token token );
 

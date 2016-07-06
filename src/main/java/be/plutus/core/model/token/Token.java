@@ -28,6 +28,14 @@ public class Token extends Identifiable{
     @Column( name = "application_name" )
     private String applicationName;
 
+    @NotBlank( message = "{NotBlank.Token.device}" )
+    @Column( name = "device" )
+    private String device;
+
+    @NotBlank( message = "{NotBlank.Token.requestIp}" )
+    @Column( name = "request_ip" )
+    private String requestIp;
+
     @NotNull( message = "{NotNull.Token.expiryDate}" )
     @Column( name = "expiry_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
@@ -69,6 +77,22 @@ public class Token extends Identifiable{
 
     public void setApplicationName( String userAgent ){
         this.applicationName = userAgent;
+    }
+
+    public String getDevice(){
+        return device;
+    }
+
+    public void setDevice( String device ){
+        this.device = device;
+    }
+
+    public String getRequestIp(){
+        return requestIp;
+    }
+
+    public void setRequestIp( String requestIp ){
+        this.requestIp = requestIp;
     }
 
     public Date getExpiryDate(){
