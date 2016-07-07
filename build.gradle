@@ -7,6 +7,15 @@ buildscript {
     }
 }
 
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.boxfuse.client:flyway-release:4.0"
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url "http://repo1.maven.org/maven2" }
@@ -18,9 +27,12 @@ ext {
     springDataVersion = "1.9.2.RELEASE"
     javaxElVersion = "3.0.0"
     bCryptVersion = "0.3m"
+    mysqlVersion = "5.1.38"
+    flywayVersion = "3.0"
 }
 
 apply plugin: "java"
+apply plugin: "org.flywaydb.flyway"
 
 dependencies {
     compile "org.springframework.data:spring-data-jpa:$springDataVersion"
@@ -29,6 +41,8 @@ dependencies {
     compile "org.hibernate:hibernate-validator:$hibernateValidationVersion"
     compile "javax.el:javax.el-api:$javaxElVersion"
     compile "org.mindrot:jbcrypt:$bCryptVersion"
+    compile "mysql:mysql-connector-java:$mysqlVersion"
+    compile "org.flywaydb:flyway-core:$flywayVersion"
 
     testCompile "junit:junit:4.11"
 }
