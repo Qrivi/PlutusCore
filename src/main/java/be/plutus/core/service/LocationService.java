@@ -6,24 +6,15 @@ import be.plutus.core.model.location.Location;
 
 public interface LocationService{
 
-    Institution createInstitution( String name,
-                                   String slur,
-                                   String hint );
+    Institution createInstitution( String name, String slur, String hint );
 
-    Campus createCampus( String name,
-                         Institution institution,
-                         double lat,
-                         double lng,
-                         String address,
-                         String zip,
-                         String city,
-                         String country );
+    Campus getCampusByName( String name );
 
-    Location createLocation( String name,
-                                double lat,
-                                double lng,
-                                Campus campus );
+    Campus createCampus( String name, Institution institution, double lat,double lng, String address, String zip, String city, String country );
 
-    Location createLocation( String name,
-                             Campus campus );
+    Location createLocation( String name, double lat, double lng, Campus campus );
+
+    Location getLocationByName( String name );
+
+    Location createLocation( String name, Campus campus );
 }

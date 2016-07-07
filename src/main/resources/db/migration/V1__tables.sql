@@ -216,6 +216,8 @@ INSERT INTO `account` (`id`,`email`,`password`,`status`,`creation_date`,`default
   VALUES (1,'davidopdebeeck@hotmail.com','$2a$12$aAU3j2T6edWrDKkDg2WYAuoiV9IsGTY6ezQjn5KZk/mFvFGUxm7kK','ACTIVE','2016-07-07 11:45:34','EUR',1);
 INSERT INTO `institution` (`id`,`name`,`slur`,`hint`)
   VALUES (1,'UC Leuven-Limburg','UCLL','');
+INSERT INTO `campus` (`id`,`name`,`lat`,`lng`,`address`,`zip`,`city`,`country`,`institution_id`)
+  VALUES (1,'Proximus',50.84,4.72,'Geldenaaksebaan 335','3001','Haasrode','Belgium',1);
 
 INSERT INTO `hibernate_sequences` (`sequence_name`, `sequence_next_hi_value`)
   VALUES ('preferences', 2);
@@ -223,6 +225,8 @@ INSERT INTO `hibernate_sequences` (`sequence_name`, `sequence_next_hi_value`)
   VALUES ('account', 2);
 INSERT INTO `hibernate_sequences` (`sequence_name`, `sequence_next_hi_value`)
   VALUES ('institution', 2);
+INSERT INTO `hibernate_sequences` (`sequence_name`, `sequence_next_hi_value`)
+  VALUES ('campus', 2);
 
 
 

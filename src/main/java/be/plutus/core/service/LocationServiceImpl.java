@@ -23,10 +23,8 @@ public class LocationServiceImpl implements LocationService{
     @Autowired
     LocationRepository locationRepository;
 
-
-    public Institution createInstitution( String name,
-                                   String slur,
-                                   String hint ){
+    @Override
+    public Institution createInstitution( String name, String slur, String hint ){
         Institution institution = new Institution();
         institution.setName( name );
         institution.setSlur( slur );
@@ -34,14 +32,13 @@ public class LocationServiceImpl implements LocationService{
         return institutionRepository.save( institution );
     }
 
-    public Campus createCampus( String name,
-                         Institution institution,
-                         double lat,
-                         double lng,
-                         String address,
-                         String zip,
-                         String city,
-                         String country ){
+    @Override
+    public Campus getCampusByName( String name ){
+        return campusRepository.findByName( name );
+    }
+
+    @Override
+    public Campus createCampus( String name, Institution institution, double lat,double lng, String address, String zip, String city, String country ){
         Campus campus = new Campus();
         campus.setName( name );
         campus.setInstitution( institution );
@@ -54,10 +51,8 @@ public class LocationServiceImpl implements LocationService{
         return campusRepository.save( campus );
     }
 
-    public Location createLocation( String name,
-                             double lat,
-                             double lng,
-                             Campus campus ){
+    @Override
+    public Location createLocation( String name, double lat, double lng, Campus campus ){
         Location location = new Location();
         location.setName( name );
         location.setLat( lat );
@@ -66,8 +61,12 @@ public class LocationServiceImpl implements LocationService{
         return locationRepository.save( location );
     }
 
-    public Location createLocation( String name,
-                             Campus campus ){
+    @Override
+    public Location getLocationByName( String name ){
+        return locationRepository.findByName( name );
+    }
+
+    public Location createLocation( String name, Campus campus ){
         Location location = new Location();
         location.setName( name );
         location.setCampus( campus );
