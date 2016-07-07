@@ -28,7 +28,6 @@ ext {
     javaxElVersion = "3.0.0"
     bCryptVersion = "0.3m"
     mysqlVersion = "5.1.38"
-    flywayVersion = "3.0"
 }
 
 apply plugin: "java"
@@ -42,7 +41,6 @@ dependencies {
     compile "javax.el:javax.el-api:$javaxElVersion"
     compile "org.mindrot:jbcrypt:$bCryptVersion"
     compile "mysql:mysql-connector-java:$mysqlVersion"
-    compile "org.flywaydb:flyway-core:$flywayVersion"
 
     testCompile "junit:junit:4.11"
 }
