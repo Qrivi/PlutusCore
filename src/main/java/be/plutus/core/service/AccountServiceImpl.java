@@ -1,5 +1,6 @@
 package be.plutus.core.service;
 
+import be.plutus.core.config.Config;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
 import be.plutus.core.model.account.preferences.Preferences;
@@ -29,26 +30,36 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public Account createAccount( String email, String password ){
+    public Account createAccount( String email, String password, Currency defaultCurrency ){
         Account account = new Account();
+
         account.setEmail( email );
         account.setPlainTextPassword( password );
         account.setStatus( AccountStatus.ACTIVE );
         account.setCreationDate( new Date() );
-        account.setDefaultCurrency( Currency.EUR );
         account.setPreferences( new Preferences() );
+
+        if( defaultCurrency == null )
+            account.setDefaultCurrency( Config.DEFAULT_CURRENCY );
+        else
+            account.setDefaultCurrency( defaultCurrency );
+
         return accountRepository.save( account );
     }
 
     @Override
-    public void updateAccount( int id, String newEmail, String newPassword ){
+    public void updateAccount( int id, String email, String password, Currency defaultCurrency ){
         Account account = accountRepository.findOne( id );
 
         if( account == null )
             throw new NullPointerException( "Account with id " + id + " was not found" );
 
-        account.setEmail( newEmail );
-        account.setPlainTextPassword( newPassword );
+        if( email != null )
+            account.setEmail( email );
+        if( password != null )
+            account.setPlainTextPassword( password );
+        if( defaultCurrency != null )
+            account.setDefaultCurrency( defaultCurrency );
 
         accountRepository.save( account );
     }

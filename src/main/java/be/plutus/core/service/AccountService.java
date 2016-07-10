@@ -1,6 +1,7 @@
 package be.plutus.core.service;
 
 import be.plutus.core.model.account.Account;
+import be.plutus.core.model.currency.Currency;
 
 public interface AccountService{
 
@@ -8,9 +9,9 @@ public interface AccountService{
 
     Account getAccount( String email );
 
-    Account createAccount( String email, String password );
+    Account createAccount( String email, String password, Currency defaultCurrency );
 
-    void updateAccount( int id, String newEmail, String newPassword );
+    void updateAccount( int id, String email, String password, Currency defaultCurrency );
 
     void removeAccount( int id );
 }
