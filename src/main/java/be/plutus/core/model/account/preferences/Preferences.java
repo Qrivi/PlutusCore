@@ -12,7 +12,7 @@ public class Preferences extends Identifiable{
     @ElementCollection
     @MapKeyColumn( name = "name" )
     @Column( name = "value" )
-    @CollectionTable( name = "preferences_map", joinColumns = @JoinColumn( name = "preference_id" ) )
+    @CollectionTable( name = "preferences_map", joinColumns = @JoinColumn( name = "preferences_id" ) )
     private Map<String, String> prefs;
 
     public Preferences(){
