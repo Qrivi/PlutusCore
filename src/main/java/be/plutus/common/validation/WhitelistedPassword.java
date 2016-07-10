@@ -9,13 +9,12 @@ import java.lang.annotation.Target;
 
 @Target( {ElementType.FIELD} )
 @Retention( RetentionPolicy.RUNTIME )
-@Constraint( validatedBy = {WhitelistedValidator.class} )
-public @interface Whitelisted{
+@Constraint( validatedBy = {WhitelistedPasswordValidator.class} )
+public @interface WhitelistedPassword{
 
-    String message() default "{be.plutus.common.validation.Whitelisted.message}";
+    String message() default "{be.plutus.common.validation.WhitelistedPassword.message}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

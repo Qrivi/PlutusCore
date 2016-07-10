@@ -1,7 +1,7 @@
 package be.plutus.core.model.account;
 
 import be.plutus.common.identifiable.Identifiable;
-import be.plutus.common.validation.Whitelisted;
+import be.plutus.common.validation.WhitelistedPassword;
 import be.plutus.core.model.account.preferences.Preferences;
 import be.plutus.core.model.currency.Currency;
 import org.hibernate.validator.constraints.Email;
@@ -26,7 +26,7 @@ public class Account extends Identifiable{
 
     @NotBlank( message = "{NotBlank.Account.password}" )
     @Size( min = 8, message = "{Size.Account.password}" )
-    @Whitelisted( message = "{Whitelisted.Account.password}" )
+    @WhitelistedPassword( message = "{WhitelistedPassword.Account.password}" )
     @Column( name = "password" )
     private String password;
 

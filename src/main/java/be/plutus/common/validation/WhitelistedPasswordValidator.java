@@ -3,7 +3,7 @@ package be.plutus.common.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class WhitelistedValidator implements ConstraintValidator<Whitelisted, String>{
+public class WhitelistedPasswordValidator implements ConstraintValidator<WhitelistedPassword, String>{
 
     private String[] blacklist = {
             "password", "pass1234", "12345678", "01234567", "baseball", "trustno1", "superman", "testtest", "computer",
@@ -11,7 +11,7 @@ public class WhitelistedValidator implements ConstraintValidator<Whitelisted, St
     };
 
     @Override
-    public void initialize( Whitelisted constraintAnnotation ){
+    public void initialize( WhitelistedPassword constraintAnnotation ){
     }
 
     @Override
