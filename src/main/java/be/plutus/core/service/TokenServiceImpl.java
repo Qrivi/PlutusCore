@@ -44,6 +44,16 @@ public class TokenServiceImpl implements TokenService{
     }
 
     @Override
+    public List<Request> getRequestsFromToken( int id ){
+        Token token = tokenRepository.findOne( id );
+
+        if( token == null )
+            throw new NullPointerException( "Token with id " + id + " was not found" );
+
+        return requestRepository.findByToken( token );
+    }
+
+    @Override
     public Token createToken( Account account, String applicationName, String device, String requestIp ){
         Token token = new Token();
         token.setAccount( account );
@@ -69,8 +79,15 @@ public class TokenServiceImpl implements TokenService{
     }
 
     @Override
-    public void removeToken( int id ){
-        tokenRepository.delete( id );
+    public void deactivateToken( int id ){
+        Token token = tokenRepository.findOne( id );
+
+        if( token == null )
+            throw new NullPointerException( "Token with id " + id + " was not found" );
+
+        token.setActive( false );
+
+        tokenRepository.save( token );
     }
 
     @Override

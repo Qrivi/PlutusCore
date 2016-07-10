@@ -12,11 +12,13 @@ public interface TokenService{
 
     List<Token> getTokensFromAccount( int id );
 
+    List<Request> getRequestsFromToken( int id );
+
     Token createToken( Account account, String applicationName , String device , String requestIp );
 
     Request createRequest( String endpoint, String method, String ip, Token token );
 
-    void removeToken( int id );
+    void deactivateToken( int id );
 
     void extendToken( Token token );
 }
