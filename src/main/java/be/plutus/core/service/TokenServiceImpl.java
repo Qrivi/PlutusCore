@@ -4,6 +4,7 @@ import be.plutus.core.config.Config;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.token.Request;
 import be.plutus.core.model.token.Token;
+import be.plutus.core.repository.AccountRepository;
 import be.plutus.core.repository.RequestRepository;
 import be.plutus.core.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,9 +25,22 @@ public class TokenServiceImpl implements TokenService{
     @Autowired
     RequestRepository requestRepository;
 
+    @Autowired
+    AccountRepository accountRepository;
+
     @Override
     public Token getToken( String token ){
         return tokenRepository.findByToken( token );
+    }
+
+    @Override
+    public List<Token> getTokensFromAccount( int id ){
+        Account account = accountRepository.findOne( id );
+
+        if( account == null )
+            throw new NullPointerException( "Account with id " + id + " was not found" );
+
+        return tokenRepository.findByAccount( account );
     }
 
     @Override
@@ -51,6 +66,11 @@ public class TokenServiceImpl implements TokenService{
         request.setTimestamp( new Date() );
         request.setToken( token );
         return requestRepository.save( request );
+    }
+
+    @Override
+    public void removeToken( int id ){
+        tokenRepository.delete( id );
     }
 
     @Override
