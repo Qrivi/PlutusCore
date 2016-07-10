@@ -149,7 +149,7 @@ REFERENCES `institution` (`id`)
   ADD CONSTRAINT `fk_user_account1`
 FOREIGN KEY (`account_id`)
 REFERENCES `account` (`id`)
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
 ALTER TABLE `transaction`
@@ -158,7 +158,7 @@ ALTER TABLE `transaction`
   ADD CONSTRAINT `fk_transaction_user1`
 FOREIGN KEY (`user_id`)
 REFERENCES `user` (`id`)
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
   ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_transaction_location1`
 FOREIGN KEY (`location_id`)
@@ -171,7 +171,7 @@ ALTER TABLE `location`
   ADD CONSTRAINT `fk_location_campus1`
 FOREIGN KEY (`campus_id`)
 REFERENCES `campus` (`id`)
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
 ALTER TABLE `campus`
@@ -179,7 +179,7 @@ ALTER TABLE `campus`
   ADD CONSTRAINT `fk_campus_institution1`
 FOREIGN KEY (`institution_id`)
 REFERENCES `institution` (`id`)
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
 ALTER TABLE `preferences_map`
@@ -187,7 +187,7 @@ ALTER TABLE `preferences_map`
   ADD CONSTRAINT `fk_preferences_map_preferences1`
 FOREIGN KEY (`preferences_id`)
 REFERENCES `preferences` (`id`)
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
 ALTER TABLE `token`
@@ -195,7 +195,7 @@ ALTER TABLE `token`
   ADD CONSTRAINT `fk_Token_account1`
 FOREIGN KEY (`account_id`)
 REFERENCES `account` (`id`)
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
 ALTER TABLE `request`
@@ -203,7 +203,7 @@ ALTER TABLE `request`
   ADD CONSTRAINT `fk_request_token1`
 FOREIGN KEY (`token_id`)
 REFERENCES `token` (`id`)
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
 /*
