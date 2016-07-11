@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS `account` (
   `status` VARCHAR(45) NOT NULL,
   `creation_date` DATETIME NOT NULL,
   `default_currency` VARCHAR(3) NOT NULL,
-  `preferences_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC)
 );
@@ -87,6 +86,7 @@ CREATE TABLE IF NOT EXISTS `campus` (
 
 CREATE TABLE IF NOT EXISTS `preferences` (
   `id` INT NOT NULL,
+  `account_id` INT NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -123,14 +123,6 @@ CREATE TABLE IF NOT EXISTS `request` (
 /*
   CONSTRAINTS
 */
-
-ALTER TABLE `account`
-  ADD INDEX `fk_account_preferences_idx` (`preferences_id` ASC),
-  ADD CONSTRAINT `fk_account_preferences`
-FOREIGN KEY (`preferences_id`)
-REFERENCES `preferences` (`id`)
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION;
 
 ALTER TABLE `user`
   ADD INDEX `fk_user_credit1_idx` (`credit_id` ASC),
@@ -182,6 +174,14 @@ REFERENCES `institution` (`id`)
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
+ALTER TABLE `preferences`
+  ADD INDEX `fk_preferences_account1_idx` (`account_id` ASC),
+  ADD CONSTRAINT `fk_preferences_account1`
+FOREIGN KEY (`account_id`)
+REFERENCES `account` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION;
+
 ALTER TABLE `preferences_map`
   ADD INDEX `fk_preferences_map_preferences1_idx` (`preferences_id` ASC),
   ADD CONSTRAINT `fk_preferences_map_preferences1`
@@ -210,10 +210,10 @@ REFERENCES `token` (`id`)
   INSERTS
 */
 
-INSERT INTO `preferences` (`id`)
-  VALUES (1);
-INSERT INTO `account` (`id`,`email`,`password`,`status`,`creation_date`,`default_currency`,`preferences_id`)
-  VALUES (1,'davidopdebeeck@hotmail.com','$2a$12$aAU3j2T6edWrDKkDg2WYAuoiV9IsGTY6ezQjn5KZk/mFvFGUxm7kK','ACTIVE','2016-07-07 11:45:34','EUR',1);
+INSERT INTO `account` (`id`,`email`,`password`,`status`,`creation_date`,`default_currency`)
+  VALUES (1,'davidopdebeeck@hotmail.com','$2a$12$aAU3j2T6edWrDKkDg2WYAuoiV9IsGTY6ezQjn5KZk/mFvFGUxm7kK','ACTIVE','2016-07-07 11:45:34','EUR');
+INSERT INTO `preferences` (`id`,`account_id`)
+  VALUES (1, 1);
 INSERT INTO `institution` (`id`,`name`,`slur`,`hint`)
   VALUES (1,'UC Leuven-Limburg','UCLL','');
 INSERT INTO `campus` (`id`,`name`,`lat`,`lng`,`address`,`zip`,`city`,`country`,`institution_id`)

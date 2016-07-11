@@ -2,14 +2,12 @@ package be.plutus.core.model.account;
 
 import be.plutus.common.identifiable.Identifiable;
 import be.plutus.common.validation.WhitelistedPassword;
-import be.plutus.core.model.account.preferences.Preferences;
 import be.plutus.core.model.currency.Currency;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -47,12 +45,6 @@ public class Account extends Identifiable{
     @Column( name = "default_currency" )
     @Enumerated( EnumType.STRING )
     private Currency defaultCurrency;
-
-    @Valid
-    @NotNull( message = "{NotNull.Account.preferences}" )
-    @OneToOne( cascade = CascadeType.ALL, orphanRemoval = true )
-    @JoinColumn( name = "preferences_id" )
-    private Preferences preferences;
 
     public Account(){
     }
@@ -104,13 +96,5 @@ public class Account extends Identifiable{
 
     public void setDefaultCurrency( Currency defaultCurrency ){
         this.defaultCurrency = defaultCurrency;
-    }
-
-    public Preferences getPreferences(){
-        return preferences;
-    }
-
-    public void setPreferences( Preferences preferences ){
-        this.preferences = preferences;
     }
 }

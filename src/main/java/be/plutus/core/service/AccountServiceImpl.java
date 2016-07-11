@@ -3,9 +3,10 @@ package be.plutus.core.service;
 import be.plutus.core.config.Config;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
-import be.plutus.core.model.account.preferences.Preferences;
+import be.plutus.core.model.preferences.Preferences;
 import be.plutus.core.model.currency.Currency;
 import be.plutus.core.repository.AccountRepository;
+import be.plutus.core.repository.PreferencesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,9 @@ public class AccountServiceImpl implements AccountService{
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    PreferencesRepository preferencesRepository;
 
     @Override
     public Account getAccount( int id ){
@@ -37,14 +41,19 @@ public class AccountServiceImpl implements AccountService{
         account.setPlainTextPassword( password );
         account.setStatus( AccountStatus.ACTIVE );
         account.setCreationDate( new Date() );
-        account.setPreferences( new Preferences() );
 
         if( defaultCurrency == null )
             account.setDefaultCurrency( Config.DEFAULT_CURRENCY );
         else
             account.setDefaultCurrency( defaultCurrency );
 
-        return accountRepository.save( account );
+        account = accountRepository.save( account );
+
+        Preferences preferences = new Preferences();
+        preferences.setAccount( account );
+        preferencesRepository.save( preferences );
+
+        return account;
     }
 
     @Override
