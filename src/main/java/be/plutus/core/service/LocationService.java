@@ -4,7 +4,11 @@ import be.plutus.core.model.location.Campus;
 import be.plutus.core.model.location.Institution;
 import be.plutus.core.model.location.Location;
 
+import java.util.List;
+
 public interface LocationService{
+
+    List<Institution> getAllInstitutions();
 
     Institution createInstitution( String name, String slur, String hint );
 

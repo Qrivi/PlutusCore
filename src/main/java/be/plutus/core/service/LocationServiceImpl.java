@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class LocationServiceImpl implements LocationService{
@@ -22,6 +24,11 @@ public class LocationServiceImpl implements LocationService{
 
     @Autowired
     LocationRepository locationRepository;
+
+    @Override
+    public List<Institution> getAllInstitutions(){
+        return institutionRepository.findAll();
+    }
 
     @Override
     public Institution createInstitution( String name, String slur, String hint ){
