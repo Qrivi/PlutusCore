@@ -49,6 +49,10 @@ public class Account extends Identifiable{
     public Account(){
     }
 
+    public void clearPassword(){
+        this.password = null;
+    }
+
     public boolean isPasswordValid( String plainTextPassword ){
         return BCrypt.checkpw( plainTextPassword, password );
     }
