@@ -10,6 +10,8 @@ public interface LocationService{
 
     List<Institution> getAllInstitutions();
 
+    Institution getInstitutionBySlur( String slur );
+
     Institution createInstitution( String name, String slur, String hint );
 
     Campus getCampusByName( String name );

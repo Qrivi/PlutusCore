@@ -38,6 +38,7 @@ public class Account extends Identifiable{
     @Temporal( TemporalType.TIMESTAMP )
     private Date creationDate;
 
+    @OrderBy( "creationDate" )
     @OneToMany( mappedBy = "account", fetch = FetchType.EAGER )
     private List<User> users;
 

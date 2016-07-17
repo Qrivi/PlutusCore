@@ -3,10 +3,14 @@ package be.plutus.core.service;
 import be.plutus.core.config.Config;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
+import be.plutus.core.model.account.Credit;
+import be.plutus.core.model.account.User;
+import be.plutus.core.model.location.Institution;
 import be.plutus.core.model.preferences.Preferences;
 import be.plutus.core.model.currency.Currency;
 import be.plutus.core.repository.AccountRepository;
 import be.plutus.core.repository.PreferencesRepository;
+import be.plutus.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +23,9 @@ public class AccountServiceImpl implements AccountService{
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     PreferencesRepository preferencesRepository;
@@ -54,6 +61,56 @@ public class AccountServiceImpl implements AccountService{
         preferencesRepository.save( preferences );
 
         return account;
+    }
+
+    @Override
+    public User createUser( int id, String firstName, String lastName, String username, String password, Institution institution ){
+        Account account = accountRepository.findOne( id );
+
+        if( account == null )
+            throw new NullPointerException( "Account with id " + id + " was not found" );
+
+        Credit credit = new Credit();
+        credit.setAmount( 0 );
+        credit.setCurrency( account.getDefaultCurrency() );
+
+        User user = new User();
+        user.setAccount( account );
+        user.setFirstName( firstName );
+        user.setLastName( lastName );
+        user.setUsername( username );
+        user.setPassword( password ); // Todo encrypt password
+        user.setInstitution( institution );
+        user.setCreationDate( new Date() );
+        user.setCredit( credit );
+
+        return userRepository.save( user );
+    }
+
+    @Override
+    public void removeUserFromAccount( int id, int index ){
+        Account account = accountRepository.findOne( id );
+
+        if( account == null )
+            throw new NullPointerException( "Account with id " + id + " was not found" );
+
+        User user = account.getUsers().get( index );
+
+        if( user == null )
+            throw new NullPointerException( "User with index " + index + " was not found" );
+
+        userRepository.delete( user );
+    }
+
+    @Override
+    public void removeAllUsersFromAccount( int id ){
+        Account account = accountRepository.findOne( id );
+
+        if( account == null )
+            throw new NullPointerException( "Account with id " + id + " was not found" );
+
+        for (int i = 0; i < account.getUsers().size(); i++)
+            userRepository.delete( account.getUsers().get( i ) );
     }
 
     @Override

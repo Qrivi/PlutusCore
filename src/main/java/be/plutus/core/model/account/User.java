@@ -41,7 +41,11 @@ public class User extends Identifiable{
     @JoinColumn( name = "credit_id" )
     private Credit credit;
 
-    @NotNull( message = "{NotNull.User.fetchDate}" )
+    @NotNull( message = "{NotNull.User.creationDate}" )
+    @Column( name = "creation_date" )
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date creationDate;
+
     @Column( name = "fetch_date" )
     @Temporal( TemporalType.TIMESTAMP )
     private Date fetchDate;
@@ -100,6 +104,14 @@ public class User extends Identifiable{
 
     public void setCredit( Credit credit ){
         this.credit = credit;
+    }
+
+    public Date getCreationDate(){
+        return creationDate;
+    }
+
+    public void setCreationDate( Date creationDate ){
+        this.creationDate = creationDate;
     }
 
     public Date getFetchDate(){

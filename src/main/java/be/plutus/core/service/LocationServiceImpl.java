@@ -31,6 +31,11 @@ public class LocationServiceImpl implements LocationService{
     }
 
     @Override
+    public Institution getInstitutionBySlur( String slur ){
+        return institutionRepository.findBySlur( slur );
+    }
+
+    @Override
     public Institution createInstitution( String name, String slur, String hint ){
         Institution institution = new Institution();
         institution.setName( name );
