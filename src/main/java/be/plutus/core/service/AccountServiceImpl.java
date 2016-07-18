@@ -8,14 +8,18 @@ import be.plutus.core.model.account.User;
 import be.plutus.core.model.location.Institution;
 import be.plutus.core.model.preferences.Preferences;
 import be.plutus.core.model.currency.Currency;
+import be.plutus.core.model.transaction.Transaction;
 import be.plutus.core.repository.AccountRepository;
 import be.plutus.core.repository.PreferencesRepository;
+import be.plutus.core.repository.TransactionRepository;
 import be.plutus.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -29,6 +33,9 @@ public class AccountServiceImpl implements AccountService{
 
     @Autowired
     PreferencesRepository preferencesRepository;
+
+    @Autowired
+    TransactionRepository transactionRepository;
 
     @Override
     public Account getAccount( int id ){
@@ -114,6 +121,22 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
+    public void resetTransactionsFromUser( int id ){
+        User user = userRepository.findOne( id );
+
+        if( user == null )
+            throw new NullPointerException( "User with id " + id + " was not found" );
+
+        user.setFetchDate( null );
+        userRepository.save( user );
+
+        List<Transaction> transactions = transactionRepository.findAllByUser( user );
+
+        for( Transaction transaction : transactions )
+            transactionRepository.delete( transaction );
+    }
+
+    @Override
     public void updateAccount( int id, String email, String password, Currency defaultCurrency ){
         Account account = accountRepository.findOne( id );
 
@@ -138,5 +161,18 @@ public class AccountServiceImpl implements AccountService{
             throw new NullPointerException( "Account with id " + id + " was not found" );
 
         accountRepository.delete( account );
+    }
+
+    @Override
+    public void updateUser( int id, String password ){
+        User user = userRepository.findOne( id );
+
+        if( user == null )
+            throw new NullPointerException( "User with id " + id + " was not found" );
+
+        if( password != null )
+            user.setPassword( password ); // Todo encrypt password
+
+        userRepository.save( user );
     }
 }

@@ -6,15 +6,21 @@ import be.plutus.core.model.location.Location;
 import be.plutus.core.model.transaction.Transaction;
 import be.plutus.core.model.transaction.TransactionType;
 import be.plutus.core.repository.TransactionRepository;
+import be.plutus.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
 public class TransactionServiceImpl implements TransactionService{
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     TransactionRepository transactionRepository;
@@ -38,5 +44,30 @@ public class TransactionServiceImpl implements TransactionService{
         transaction.setTimestamp( timestamp );
         transaction.setUser( user );
         return transactionRepository.save( transaction );
+    }
+
+    @Override
+    public Transaction getTransaction( int id ){
+        return transactionRepository.findOne( id );
+    }
+
+    @Override
+    public List<Transaction> getTransactionByUser( int id, int limit, int offset ){
+        User user = userRepository.findOne( id );
+
+        if( user == null )
+            throw new NullPointerException( "User with id " + id + " was not found" );
+
+        return transactionRepository.findByUser( user, new PageRequest( offset, limit ) );
+    }
+
+    @Override
+    public List<Transaction> getTransactionByUserAndType( int id, TransactionType type, int limit, int offset ){
+        User user = userRepository.findOne( id );
+
+        if( user == null )
+            throw new NullPointerException( "User with id " + id + " was not found" );
+
+        return transactionRepository.findByUserAndType( user, type, new PageRequest( offset, limit ) );
     }
 }

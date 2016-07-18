@@ -10,6 +10,13 @@ public enum TransactionType{
         this.type = type;
     }
 
+    public static TransactionType getFromType( String name ){
+        for( TransactionType type : values() )
+            if( type.type.equalsIgnoreCase( name ) )
+                return type;
+        return null;
+    }
+
     @Override
     public String toString(){
         return this.type;

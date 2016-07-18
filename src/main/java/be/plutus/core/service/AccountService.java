@@ -17,9 +17,13 @@ public interface AccountService{
 
     void removeUserFromAccount( int id, int index );
 
-    void removeAllUsersFromAccount( int id);
+    void removeAllUsersFromAccount( int id );
+
+    void resetTransactionsFromUser( int id );
 
     void updateAccount( int id, String email, String password, Currency defaultCurrency );
 
     void removeAccount( int id );
+
+    void updateUser( int id, String password );
 }

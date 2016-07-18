@@ -5,8 +5,10 @@ import be.plutus.core.model.currency.Currency;
 import be.plutus.core.model.location.Location;
 import be.plutus.core.model.transaction.Transaction;
 import be.plutus.core.model.transaction.TransactionType;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Date;
+import java.util.List;
 
 public interface TransactionService{
     Transaction createTransaction( String title,
@@ -16,5 +18,13 @@ public interface TransactionService{
                                    TransactionType type,
                                    Location location,
                                    Date timestamp,
-                                   User user);
+                                   User user );
+
+
+
+    Transaction getTransaction( int id );
+
+    List<Transaction> getTransactionByUser( int id, int limit, int offset );
+
+    List<Transaction> getTransactionByUserAndType( int id, TransactionType type, int limit, int offset );
 }
