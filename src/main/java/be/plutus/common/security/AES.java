@@ -5,7 +5,6 @@ import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import be.plutus.core.config.Config;
 import org.apache.commons.codec.binary.Base64;
 
 public class AES{
@@ -23,8 +22,7 @@ public class AES{
         } catch ( Exception ignored ) {}
     }
 
-    public static String encrypt( String toEncrypt )
-    {
+    public static String encrypt( String toEncrypt ){
         try
         {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -36,26 +34,15 @@ public class AES{
         }
     }
 
-    public static String decrypt(String toDecrypt )
-    {
+    public static String decrypt( String toDecrypt ){
         try
         {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.decodeBase64( toDecrypt )));
         }
-        catch (Exception e){
+        catch ( Exception ignored ){
             return null;
         }
-    }
-
-    public static void main(String args[])
-    {
-        AES.setKey( Config.SECRET_KEY );
-        String encrypted = AES.encrypt( "this-is-a-password" );
-        String decrypted = AES.decrypt( encrypted );
-
-        System.out.println( "Encrypted : " + encrypted );
-        System.out.println( "Decrypted : " + decrypted );
     }
 }
