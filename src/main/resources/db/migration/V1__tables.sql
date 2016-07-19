@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `institution` (
   `name` VARCHAR(45) NOT NULL,
   `slur` VARCHAR(10) NOT NULL,
   `hint` VARCHAR(80) NULL,
+  `username_pattern` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC),
   UNIQUE INDEX `slur_UNIQUE` (`slur` ASC)
@@ -215,8 +216,8 @@ INSERT INTO `account` (`id`,`email`,`password`,`status`,`creation_date`,`default
   VALUES (1,'davidopdebeeck@hotmail.com','$2a$12$aAU3j2T6edWrDKkDg2WYAuoiV9IsGTY6ezQjn5KZk/mFvFGUxm7kK','ACTIVE','2016-07-07 11:45:34','EUR');
 INSERT INTO `preferences` (`id`,`account_id`)
   VALUES (1, 1);
-INSERT INTO `institution` (`id`,`name`,`slur`,`hint`)
-  VALUES (1,'UC Leuven-Limburg','UCLL','');
+INSERT INTO `institution` (`id`,`name`,`slur`,`hint`,`username_pattern`)
+  VALUES (1,'UC Leuven-Limburg','UCLL','Log in using your student ID and password','^([m|r|s][0-9]{7})$');
 INSERT INTO `campus` (`id`,`name`,`lat`,`lng`,`address`,`zip`,`city`,`country`,`institution_id`)
   VALUES (1,'Proximus',50.84,4.72,'Geldenaaksebaan 335','3001','Haasrode','Belgium',1);
 

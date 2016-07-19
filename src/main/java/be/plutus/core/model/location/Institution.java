@@ -24,12 +24,11 @@ public class Institution extends Identifiable{
     @Column( name = "hint" )
     private String hint;
 
-    public Institution(){
-    }
+    @NotBlank( message = "{NotBlank.Institution.usernamePattern}" )
+    @Column( name = "username_pattern" )
+    private String usernamePattern;
 
-    public Institution( String slur, String name ){
-        this.slur = slur;
-        this.name = name;
+    public Institution(){
     }
 
     public String getName(){
@@ -54,5 +53,13 @@ public class Institution extends Identifiable{
 
     public void setHint( String hint ){
         this.hint = hint;
+    }
+
+    public String getUsernamePattern(){
+        return usernamePattern;
+    }
+
+    public void setUsernamePattern( String usernamePattern ){
+        this.usernamePattern = usernamePattern;
     }
 }
