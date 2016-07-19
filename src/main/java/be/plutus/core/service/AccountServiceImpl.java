@@ -1,5 +1,6 @@
 package be.plutus.core.service;
 
+import be.plutus.common.security.AES;
 import be.plutus.core.config.Config;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
@@ -86,7 +87,7 @@ public class AccountServiceImpl implements AccountService{
         user.setFirstName( firstName );
         user.setLastName( lastName );
         user.setUsername( username );
-        user.setPassword( password ); // Todo encrypt password
+        user.setPlainTextPassword( password );
         user.setInstitution( institution );
         user.setCreationDate( new Date() );
         user.setCredit( credit );
@@ -171,7 +172,7 @@ public class AccountServiceImpl implements AccountService{
             throw new NullPointerException( "User with id " + id + " was not found" );
 
         if( password != null )
-            user.setPassword( password ); // Todo encrypt password
+            user.setPlainTextPassword( password );
 
         userRepository.save( user );
     }

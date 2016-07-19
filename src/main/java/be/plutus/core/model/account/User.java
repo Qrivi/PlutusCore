@@ -1,6 +1,7 @@
 package be.plutus.core.model.account;
 
 import be.plutus.common.identifiable.Identifiable;
+import be.plutus.common.security.AES;
 import be.plutus.core.model.location.Institution;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -90,12 +91,12 @@ public class User extends Identifiable{
         this.username = username.trim();
     }
 
-    public String getPassword(){
-        return password;
+    public String getPlainTextPassword(){
+        return AES.decrypt(password);
     }
 
-    public void setPassword( String password ){
-        this.password = password;
+    public void setPlainTextPassword( String password ){
+        this.password = AES.encrypt(password);
     }
 
     public Credit getCredit(){
