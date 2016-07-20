@@ -1,6 +1,5 @@
 package be.plutus.core.service;
 
-import be.plutus.common.security.AES;
 import be.plutus.core.config.Config;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
@@ -15,7 +14,6 @@ import be.plutus.core.repository.PreferencesRepository;
 import be.plutus.core.repository.TransactionRepository;
 import be.plutus.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,11 +54,7 @@ public class AccountServiceImpl implements AccountService{
         account.setPlainTextPassword( password );
         account.setStatus( AccountStatus.ACTIVE );
         account.setCreationDate( new Date() );
-
-        if( defaultCurrency == null )
-            account.setDefaultCurrency( Config.DEFAULT_CURRENCY );
-        else
-            account.setDefaultCurrency( defaultCurrency );
+        account.setDefaultCurrency( defaultCurrency == null ? Config.DEFAULT_CURRENCY : defaultCurrency );
 
         account = accountRepository.save( account );
 

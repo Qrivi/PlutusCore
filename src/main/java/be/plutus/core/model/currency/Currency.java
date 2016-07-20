@@ -22,6 +22,13 @@ public enum Currency{
         return null;
     }
 
+    public static Currency getFromAbbreviation( String abbrev ){
+        for( Currency currency : values() )
+            if( currency.name().equalsIgnoreCase( abbrev ) )
+                return currency;
+        return null;
+    }
+
     public String getName(){
         return name;
     }

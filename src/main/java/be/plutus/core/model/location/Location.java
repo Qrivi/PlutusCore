@@ -39,7 +39,7 @@ public class Location extends Identifiable{
     }
 
     public double getLat(){
-        return lat;
+        return lat == 0 ? campus.getLat() : lat;
     }
 
     public void setLat( double lat ){
@@ -47,7 +47,7 @@ public class Location extends Identifiable{
     }
 
     public double getLng(){
-        return lng;
+        return lng == 0 ? campus.getLng() : lng;
     }
 
     public void setLng( double lng ){

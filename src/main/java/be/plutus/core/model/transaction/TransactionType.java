@@ -17,6 +17,13 @@ public enum TransactionType{
         return null;
     }
 
+    public static TransactionType getFromAbbreviation( String abbrev ){
+        for( TransactionType type : values() )
+            if( type.name().equalsIgnoreCase( abbrev ) )
+                return type;
+        return null;
+    }
+
     @Override
     public String toString(){
         return this.type;

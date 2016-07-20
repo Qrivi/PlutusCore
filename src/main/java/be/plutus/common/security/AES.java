@@ -5,9 +5,14 @@ import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import be.plutus.core.config.Config;
 import org.apache.commons.codec.binary.Base64;
 
 public class AES{
+
+    static{
+        AES.setKey( Config.SECRET_KEY );
+    }
 
     private static SecretKeySpec secretKey;
 

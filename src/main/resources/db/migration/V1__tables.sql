@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `id` INT NOT NULL,
   `title` VARCHAR(45) NOT NULL,
   `description` VARCHAR(255) NULL,
-  `amount` INT NOT NULL,
+  `amount` DOUBLE NOT NULL,
   `currency` VARCHAR(3) NOT NULL,
   `type` VARCHAR(7) NOT NULL,
   `timestamp` DATETIME NOT NULL,
