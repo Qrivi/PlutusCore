@@ -14,7 +14,7 @@ public interface TokenService{
 
     List<Request> getRequestsFromToken( int id );
 
-    Token createToken( Account account, String applicationName , String device , String requestIp );
+    Token createToken( Account account, String applicationName, String device, String requestIp );
 
     Request createRequest( String endpoint, String method, String ip, Token token );
 

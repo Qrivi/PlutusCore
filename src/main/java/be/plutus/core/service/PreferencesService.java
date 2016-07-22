@@ -6,5 +6,5 @@ public interface PreferencesService{
 
     Preferences getPreferenceFromAccount( int id );
 
-    Preferences addPreference( int id , String key, String value );
+    Preferences addPreference( int id, String key, String value );
 }

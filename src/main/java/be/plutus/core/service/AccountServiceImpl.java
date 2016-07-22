@@ -5,9 +5,9 @@ import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
 import be.plutus.core.model.account.Credit;
 import be.plutus.core.model.account.User;
+import be.plutus.core.model.currency.Currency;
 import be.plutus.core.model.location.Institution;
 import be.plutus.core.model.preferences.Preferences;
-import be.plutus.core.model.currency.Currency;
 import be.plutus.core.model.transaction.Transaction;
 import be.plutus.core.repository.AccountRepository;
 import be.plutus.core.repository.PreferencesRepository;
@@ -111,7 +111,7 @@ public class AccountServiceImpl implements AccountService{
         if( account == null )
             throw new NullPointerException( "Account with id " + id + " was not found" );
 
-        for (int i = 0; i < account.getUsers().size(); i++)
+        for( int i = 0; i < account.getUsers().size(); i++ )
             userRepository.delete( account.getUsers().get( i ) );
     }
 

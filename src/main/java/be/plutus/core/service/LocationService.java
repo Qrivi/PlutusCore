@@ -16,7 +16,7 @@ public interface LocationService{
 
     Campus getCampusByName( String name );
 
-    Campus createCampus( String name, Institution institution, double lat,double lng, String address, String zip, String city, String country );
+    Campus createCampus( String name, Institution institution, double lat, double lng, String address, String zip, String city, String country );
 
     Location createLocation( String name, double lat, double lng, Campus campus );
 

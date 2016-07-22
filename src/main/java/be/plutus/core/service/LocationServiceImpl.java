@@ -50,7 +50,7 @@ public class LocationServiceImpl implements LocationService{
     }
 
     @Override
-    public Campus createCampus( String name, Institution institution, double lat,double lng, String address, String zip, String city, String country ){
+    public Campus createCampus( String name, Institution institution, double lat, double lng, String address, String zip, String city, String country ){
         Campus campus = new Campus();
         campus.setName( name );
         campus.setInstitution( institution );
