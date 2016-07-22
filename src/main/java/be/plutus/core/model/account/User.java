@@ -92,11 +92,11 @@ public class User extends Identifiable{
     }
 
     public String getPlainTextPassword(){
-        return AES.decrypt(password);
+        return AES.decrypt( password );
     }
 
     public void setPlainTextPassword( String password ){
-        this.password = AES.encrypt(password);
+        this.password = AES.encrypt( password );
     }
 
     public Credit getCredit(){

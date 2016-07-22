@@ -5,7 +5,6 @@ import be.plutus.core.model.currency.Currency;
 import be.plutus.core.model.location.Location;
 import be.plutus.core.model.transaction.Transaction;
 import be.plutus.core.model.transaction.TransactionType;
-import org.springframework.data.domain.Pageable;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +18,6 @@ public interface TransactionService{
                                    Location location,
                                    Date timestamp,
                                    User user );
-
 
 
     Transaction getTransaction( int id );
