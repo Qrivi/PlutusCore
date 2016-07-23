@@ -1,7 +1,8 @@
 package be.plutus.core.service;
 
 import be.plutus.core.config.Config;
-import be.plutus.core.exception.ModelException;
+import be.plutus.core.exception.AccountAlreadyExistsException;
+import be.plutus.core.exception.UserAlreadyExistsException;
 import be.plutus.core.model.account.Account;
 import be.plutus.core.model.account.AccountStatus;
 import be.plutus.core.model.account.Credit;
@@ -57,10 +58,8 @@ public class AccountServiceImpl implements AccountService{
         account.setCreationDate( new Date() );
         account.setDefaultCurrency( defaultCurrency == null ? Config.DEFAULT_CURRENCY : defaultCurrency );
 
-        //TODO tell Qrivi why this is a bad idea (yes, i, Qrivi, wrote this myself)
-        for( Account a : accountRepository.findAll() )
-            if( account.equals( a ))
-                throw new ModelException( "Account does already exists" );
+        if( accountRepository.findByEmail( email ) != null )
+            throw new AccountAlreadyExistsException( "Account does already exist" );
 
         account = accountRepository.save( account );
 
@@ -94,8 +93,8 @@ public class AccountServiceImpl implements AccountService{
         user.setCredit( credit );
 
         for( User u : account.getUsers() )
-            if( user.equals( u ))
-                throw new ModelException( "User does already exists" );
+            if( user.equals( u ) )
+                throw new UserAlreadyExistsException( "User does already exist" );
 
         return userRepository.save( user );
     }
@@ -156,10 +155,8 @@ public class AccountServiceImpl implements AccountService{
         if( defaultCurrency != null )
             account.setDefaultCurrency( defaultCurrency );
 
-        //TODO tell Qrivi why this is a bad idea (yes, i, Qrivi, copypasted from the todo above)
-        for( Account a : accountRepository.findAll() )
-            if( account.equals( a ))
-                throw new ModelException( "Account does already exists" );
+        if( accountRepository.findByEmail( email ) != null )
+            throw new AccountAlreadyExistsException( "Account does already exist" );
 
         accountRepository.save( account );
     }
