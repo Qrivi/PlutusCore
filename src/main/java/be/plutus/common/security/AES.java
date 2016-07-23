@@ -16,7 +16,7 @@ public class AES{
         AES.setKey( Config.SECRET_KEY );
     }
 
-    public static void setKey( String key ){
+    private static void setKey( String key ){
         MessageDigest mDigest;
         try{
             byte[] keyBytes = key.getBytes( "UTF-8" );
