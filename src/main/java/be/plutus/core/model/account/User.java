@@ -130,4 +130,16 @@ public class User extends Identifiable{
     public void setAccount( Account account ){
         this.account = account;
     }
+
+    @Override
+    public boolean equals( Object o ){
+        if( this == o ) return true;
+        if( !( o instanceof User ) ) return false;
+
+        User user = (User)o;
+
+        if( !getInstitution().equals( user.getInstitution() ) ) return false;
+        if( !getUsername().equals( user.getUsername() ) ) return false;
+        return getAccount().equals( user.getAccount() );
+    }
 }

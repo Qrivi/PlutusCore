@@ -102,4 +102,14 @@ public class Account extends Identifiable{
     public void setDefaultCurrency( Currency defaultCurrency ){
         this.defaultCurrency = defaultCurrency;
     }
+
+    @Override
+    public boolean equals( Object o ){
+        if( this == o ) return true;
+        if( !( o instanceof Account ) ) return false;
+
+        Account account = (Account)o;
+
+        return getEmail().equals( account.getEmail() );
+    }
 }
