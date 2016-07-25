@@ -1,8 +1,10 @@
 package be.plutus.core.service;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 public interface DateService{
 
-    Date getDate();
+    ZonedDateTime now();
+    ZonedDateTime convert( Date date );
 }
